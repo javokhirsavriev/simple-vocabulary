@@ -45,7 +45,7 @@ class LoadingView : RelativeLayout {
         }
     }
 
-    fun onFailure(error: String = context.getString(R.string.error_nothing_found)) {
+    fun onFailure(error: String = context.getString(R.string.no_data)) {
         removeAllViews()
 
         val params = LayoutHelper.createRelative(context, MATCH_PARENT)

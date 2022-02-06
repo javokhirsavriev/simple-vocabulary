@@ -1,5 +1,9 @@
 package uz.javokhirdev.svocabulary.domain.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -8,6 +12,7 @@ import uz.javokhirdev.svocabulary.data.db.sets.SetEntity
 import uz.javokhirdev.svocabulary.data.db.sets.SetsDao
 import uz.javokhirdev.svocabulary.data.db.words.WordsDao
 import uz.javokhirdev.svocabulary.utils.DispatcherProvider
+import uz.javokhirdev.svocabulary.utils.PAGE_SIZE
 import javax.inject.Inject
 
 class SetsRepository @Inject constructor(
@@ -16,17 +21,16 @@ class SetsRepository @Inject constructor(
     private val dispatcher: DispatcherProvider
 ) {
 
-    suspend fun getSets() = flow {
-        emit(UIState.loading(true))
-
-        val sets = setsDao.getSets()
-
-        emit(UIState.loading(false))
-        emit(UIState.success(sets))
-    }.catch { throwable ->
-        emit(UIState.loading(false))
-        emit(UIState.failure(throwable.message.orEmpty()))
-    }.flowOn(dispatcher.getIO())
+    fun getSets(): Flow<PagingData<SetEntity>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = PAGE_SIZE,
+                enablePlaceholders = false,
+                prefetchDistance = 3
+            ),
+            pagingSourceFactory = { setsDao.getSets() }
+        ).flow
+    }
 
     suspend fun getSetById(id: Long) = flow {
         emit(UIState.loading(true))

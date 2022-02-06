@@ -5,6 +5,7 @@ import android.os.Build
 /* Base constants */
 const val MATCH_PARENT = -1
 const val WRAP_CONTENT = -2
+const val PAGE_SIZE = 10
 
 /* Build versions */
 fun isMarshmallowPlus() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M

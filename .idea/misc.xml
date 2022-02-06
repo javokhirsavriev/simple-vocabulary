@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bg_input.xml" value="0.1895" />
+        <entry key="app/src/main/res/drawable/bg_ripple_layout.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/ic_arrow_back.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.187" />
@@ -12,6 +14,8 @@
         <entry key="app/src/main/res/drawable/ic_volume_up.xml" value="0.187" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.37552083333333336" />
+        <entry key="app/src/main/res/layout/fragment_set_detail.xml" value="0.37552083333333336" />
+        <entry key="app/src/main/res/layout/item_set.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/menu/menu_home.xml" value="0.37552083333333336" />
       </map>
     </option>

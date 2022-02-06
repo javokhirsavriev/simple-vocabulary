@@ -3,6 +3,7 @@ package uz.javokhirdev.svocabulary.presentation.wordList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -12,7 +13,7 @@ import uz.javokhirdev.svocabulary.data.db.words.WordEntity
 import uz.javokhirdev.svocabulary.domain.repository.WordsRepository
 import javax.inject.Inject
 
-@AndroidEntryPoint
+@HiltViewModel
 class WordListVM @Inject constructor(
     private val repository: WordsRepository
 ) : ViewModel() {
