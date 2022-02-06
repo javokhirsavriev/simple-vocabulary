@@ -2,18 +2,141 @@
 
     <!-- Base application theme. -->
     <style name="Theme.SimpleVocabulary" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/colorApp</item>
+        <item name="colorPrimaryDark">@color/colorDarkBlack</item>
+        <item name="colorAccent">@color/colorApp</item>
+        <item name="colorError">@color/colorRed</item>
 
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="android:navigationBarColor">@color/colorDarkBlack</item>
+        <item name="android:statusBarColor">@color/colorDarkBlack</item>
 
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:windowBackground">@color/colorGray100</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:autofilledHighlight" tools:targetApi="o">@color/colorTransparent</item>
+
+        <item name="alertDialogTheme">@style/DialogStyle</item>
+        <item name="materialAlertDialogTheme">@style/DialogStyle</item>
+    </style>
+
+    <!--Toolbar styles-->
+    <style name="AppBarStyle" parent="Widget.MaterialComponents.AppBarLayout.Primary">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:stateListAnimator">@animator/elevation</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@color/colorWhite</item>
+        <item name="materialThemeOverlay">@style/ToolbarThemeOverlay</item>
+        <item name="navigationIconTint">@color/colorBlack</item>
+        <item name="titleCentered">true</item>
+        <item name="titleTextAppearance">@style/Text20sp</item>
+        <item name="titleTextColor">@color/colorBlack</item>
+        <item name="subtitleTextAppearance">@style/Text16sp</item>
+        <item name="subtitleTextColor">@color/colorBlack</item>
+    </style>
+
+    <style name="ToolbarThemeOverlay">
+        <item name="iconTint">@color/colorBlack</item>
+    </style>
+
+    <!--ImageView styles-->
+    <style name="ImageBase">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:background">@color/colorTransparent</item>
+    </style>
+
+    <!--Layout styles-->
+    <style name="LayoutVertical">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="LayoutHorizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!--MaterialCardView styles-->
+    <style name="CardItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cardBackgroundColor">@color/colorWhite</item>
+        <item name="cardCornerRadius">@dimen/dp_16</item>
+        <item name="cardElevation">@dimen/dp_0</item>
+        <item name="cardMaxElevation">@dimen/dp_0</item>
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="cardUseCompatPadding">false</item>
+        <item name="strokeWidth">@dimen/dp_1</item>
+        <item name="strokeColor">@color/colorGray</item>
+    </style>
+
+    <!--BottomSheet styles-->
+    <style name="BottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+    </style>
+
+    <style name="BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/ShapeTopRounded</item>
+    </style>
+
+    <!--Other styles-->
+    <style name="ScrollView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:overScrollMode">never</item>
+    </style>
+
+    <style name="RecyclerView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:overScrollMode">never</item>
+    </style>
+
+    <style name="DividerView">
+        <item name="android:background">@color/colorGray200</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_1</item>
+    </style>
+
+    <!--Dialog styles-->
+    <style name="DialogStyle" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">@color/colorApp</item>
+        <item name="colorSecondary">@color/colorAppTransparent25</item>
+        <item name="colorSurface">@color/colorWhite</item>
+        <item name="colorOnSurface">@color/colorBlack</item>
+        <item name="dialogCornerRadius">@dimen/dp_12</item>
+        <item name="alertDialogStyle">@style/DialogShape</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/DialogTitleText</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/DialogBodyText</item>
+    </style>
+
+    <style name="DialogShape" parent="MaterialAlertDialog.MaterialComponents">
+        <item name="shapeAppearance">@style/ShapeRounded</item>
+    </style>
+
+    <style name="DialogTitleText" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="DialogBodyText" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/sp_16</item>
     </style>
 
 </resources>

@@ -12,3 +12,33 @@ sealed class UIState<out T> where T : Any? {
         fun failure(message: String) = Failure(message)
     }
 }
+
+infix fun <T> UIState<T>.onLoading(onLoading: UIState.Loading.() -> Unit): UIState<T> {
+    return when (this) {
+        is UIState.Loading -> {
+            onLoading(this)
+            this
+        }
+        else -> this
+    }
+}
+
+infix fun <T> UIState<T>.onSuccess(onSuccess: UIState.Success<T>.() -> Unit): UIState<T> {
+    return when (this) {
+        is UIState.Success -> {
+            onSuccess(this)
+            this
+        }
+        else -> this
+    }
+}
+
+infix fun <T> UIState<T>.onFailure(onFailure: UIState.Failure.() -> Unit): UIState<T> {
+    return when (this) {
+        is UIState.Failure -> {
+            onFailure(this)
+            this
+        }
+        else -> this
+    }
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="UnelevatedButtonStyle" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:insetTop">@dimen/dp_0</item>
+        <item name="android:insetBottom">@dimen/dp_0</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:minLines">1</item>
+        <item name="android:paddingTop">@dimen/dp_16</item>
+        <item name="android:paddingBottom">@dimen/dp_16</item>
+        <item name="android:paddingStart">@dimen/dp_16</item>
+        <item name="android:paddingEnd">@dimen/dp_16</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/color_button_text</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">@color/color_button_tint</item>
+        <item name="cornerRadius">@dimen/dp_72</item>
+    </style>
+
+    <style name="ImageButton">
+        <item name="android:layout_width">?attr/actionBarSize</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@color/colorTransparent</item>
+        <item name="android:tint">@color/colorBlack</item>
+    </style>
+
+    <style name="NormalFabButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fabSize">normal</item>
+        <item name="pressedTranslationZ">@dimen/dp_3</item>
+    </style>
+
+    <style name="ThemeFabAppWhite">
+        <item name="colorSecondary">@color/colorApp</item>
+        <item name="colorOnSecondary">@color/colorWhite</item>
+        <item name="colorOnSurface">@color/colorApp</item>
+    </style>
+
+</resources>

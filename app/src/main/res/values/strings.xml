@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">simple-vocabulary</string>
+    <string name="all_sets">All sets</string>
+    <string name="all_words">All words</string>
+    <string name="error_nothing_found">Nothing found</string>
+    <string name="create_set">Create a set</string>
 </resources>
