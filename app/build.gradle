@@ -70,6 +70,8 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
     implementation "androidx.room:room-runtime:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
     kapt "androidx.room:room-compiler:$roomVersion"
 
     /* Google libraries */
@@ -78,5 +80,5 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
 
-    implementation "com.github.javokhirsavriev:common-extensions:1.0.5"
+    implementation "com.github.javokhirsavriev:common-extensions:1.0.6"
 }
