@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/LayoutVertical"
+    android:layout_margin="@dimen/dp_8"
+    android:background="@drawable/bg_ripple_layout"
+    android:padding="@dimen/dp_16">
+
+    <TextView
+        android:id="@+id/textTitle"
+        style="@style/Text20sp" />
+
+    <TextView
+        android:id="@+id/textDescription"
+        style="@style/Text16sp"
+        android:layout_marginTop="@dimen/dp_8"
+        android:ellipsize="end"
+        android:maxLines="3" />
+</LinearLayout>

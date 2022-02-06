@@ -30,7 +30,24 @@
         android:id="@+id/setDetailFragment"
         android:name="uz.javokhirdev.svocabulary.presentation.setDetail.SetDetailFragment"
         android:label="@string/all_sets"
-        tools:layout="@layout/fragment_set_detail" />
+        tools:layout="@layout/fragment_set_detail">
+        <argument
+            android:name="isNewCreate"
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <argument
+            android:name="id"
+            android:defaultValue="0L"
+            app:argType="long" />
+        <argument
+            android:name="title"
+            android:defaultValue=""
+            app:argType="string" />
+        <argument
+            android:name="description"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/wordListFragment"

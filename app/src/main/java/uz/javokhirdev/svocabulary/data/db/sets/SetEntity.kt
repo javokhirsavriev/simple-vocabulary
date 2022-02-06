@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class SetEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "set_id")
-    val id: Long = 1L,
+    val id: Long = 0L,
 
     @ColumnInfo(name = "set_title")
     val title: String? = null,

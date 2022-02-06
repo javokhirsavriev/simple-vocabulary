@@ -1,13 +1,13 @@
 package uz.javokhirdev.svocabulary.data.db.sets
 
+import androidx.paging.PagingSource
 import androidx.room.*
 
 @Dao
 interface SetsDao {
 
-    @Transaction
     @Query("SELECT * FROM sets ORDER BY created_at DESC")
-    suspend fun getSets(): List<SetEntity>
+    fun getSets(): PagingSource<Int, SetEntity>
 
     @Query("SELECT * FROM sets WHERE set_id = :id")
     suspend fun getSetById(id: Long): SetEntity?

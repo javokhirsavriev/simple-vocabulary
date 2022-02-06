@@ -28,6 +28,11 @@
 
     <style name="InputView" parent="Text16sp">
         <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_input</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:padding">@dimen/dp_16</item>
+        <item name="android:textColorHint">@color/colorGray500</item>
     </style>
 
 </resources>
