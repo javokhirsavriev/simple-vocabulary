@@ -6,11 +6,13 @@ import androidx.room.*
 @Dao
 interface CardsDao {
 
-    @Query("SELECT * FROM cards WHERE card_set_id = :setId ORDER BY created_at DESC")
-    fun getWords(setId: Long): PagingSource<Int, CardEntity>
+    @Query("SELECT * FROM cards WHERE card_set_id = :setId " +
+            "AND (card_term LIKE :keyword OR card_definition LIKE :keyword)" +
+            "ORDER BY created_at DESC")
+    fun getCards(setId: Long, keyword: String): PagingSource<Int, CardEntity>
 
     @Query("SELECT * FROM cards WHERE card_id = :id")
-    suspend fun getWordById(id: Long): CardEntity?
+    suspend fun getCardById(id: Long): CardEntity?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(obj: CardEntity): Long
@@ -24,9 +26,9 @@ interface CardsDao {
         if (id == -1L) update(obj)
     }
 
-    @Delete
-    suspend fun delete(obj: CardEntity)
+    @Query("DELETE FROM cards WHERE card_id = :cardId")
+    suspend fun delete(cardId: Long)
 
     @Query("DELETE FROM cards WHERE card_set_id = :setId")
-    suspend fun deleteWordsBySetId(setId: Long)
+    suspend fun deleteCardsBySetId(setId: Long)
 }

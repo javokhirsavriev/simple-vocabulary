@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import uz.javokhirdev.extensions.beVisibleIf
 import uz.javokhirdev.extensions.inflater
 import uz.javokhirdev.extensions.onClick
 import uz.javokhirdev.svocabulary.data.db.sets.SetEntity
@@ -36,6 +37,8 @@ class SetListAdapter(
 
         fun bind(item: SetEntity) {
             with(binding) {
+                textDescription.beVisibleIf(!item.description.isNullOrEmpty())
+
                 textTitle.text = item.title
                 textDescription.text = item.description
             }

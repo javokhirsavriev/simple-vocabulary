@@ -17,7 +17,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/ToolbarStyle"
-            app:menu="@menu/menu_words"
+            app:menu="@menu/menu_cards"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:titleCentered="false" />
     </com.google.android.material.appbar.AppBarLayout>
@@ -35,7 +35,7 @@
         style="@style/RecyclerView"
         android:layout_width="@dimen/dp_0"
         android:layout_height="@dimen/dp_0"
-        android:paddingTop="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_12"
         android:paddingBottom="@dimen/dp_72"
         app:layout_constraintBottom_toTopOf="@+id/viewInputDivider"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,22 +73,22 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/buttonAdd"
+        android:id="@+id/buttonFlashcard"
         style="@style/NormalFabButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_24"
         android:includeFontPadding="false"
         android:letterSpacing="0.05"
-        android:paddingStart="@dimen/dp_12"
+        android:paddingStart="@dimen/dp_16"
         android:paddingEnd="@dimen/dp_20"
-        android:text="@string/add_card"
+        android:text="@string/flashcards"
         android:textAllCaps="false"
         android:textSize="@dimen/sp_16"
         android:textStyle="bold"
-        app:icon="@drawable/ic_add"
+        app:icon="@drawable/ic_fitness"
         app:iconGravity="textStart"
-        app:iconPadding="@dimen/dp_8"
+        app:iconPadding="@dimen/dp_12"
         app:layout_constraintBottom_toTopOf="@+id/viewInputDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:materialThemeOverlay="@style/ThemeFabAppWhite" />

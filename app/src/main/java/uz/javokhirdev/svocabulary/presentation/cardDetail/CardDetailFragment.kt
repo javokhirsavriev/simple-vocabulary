@@ -37,16 +37,13 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
             inputDefinition.onTextChangeListener { definition = this }
 
             buttonSave.onClick { createCard() }
+            buttonDelete.onClick { viewModel.deleteCard() }
         }
 
         with(viewModel) {
-            repeatingJobOnStarted {
-                card.collectLatest { onCardState(it) }
-            }
-
-            repeatingJobOnStarted {
-                create.collectLatest { onCreateState(it) }
-            }
+            repeatingJobOnStarted { card.collectLatest { onCardState(it) } }
+            repeatingJobOnStarted { create.collectLatest { onCreateState(it) } }
+            repeatingJobOnStarted { delete.collectLatest { onDeleteState(it) } }
         }
     }
 
@@ -54,6 +51,7 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
         with(binding) {
             uiState onLoading {
                 buttonSave.onLoading(isLoading)
+                buttonDelete.onLoading(isLoading)
             } onSuccess {
                 setCardData(data)
             }
@@ -64,6 +62,20 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
         with(binding) {
             uiState onLoading {
                 buttonSave.onLoading(isLoading)
+                buttonDelete.onLoading(isLoading)
+            } onSuccess {
+                findNavController().navigateUp()
+            } onFailure {
+                toast(message)
+            }
+        }
+    }
+
+    private fun onDeleteState(uiState: UIState<Long>) {
+        with(binding) {
+            uiState onLoading {
+                buttonSave.onLoading(isLoading)
+                buttonDelete.onLoading(isLoading)
             } onSuccess {
                 findNavController().navigateUp()
             } onFailure {
@@ -89,6 +101,8 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
 
             buttonSave.setButtonText(getString(buttonText))
             buttonSave.setIconResource(buttonIcon)
+
+            buttonDelete.beVisibleIf(!isNewCreate)
         }
     }
 

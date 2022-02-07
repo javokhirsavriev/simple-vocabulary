@@ -29,11 +29,9 @@ class CardListAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         init {
-            getItem(layoutPosition)?.let {
-                with(binding) {
-                    root.onClick { listener.onCardClick(it) }
-                    buttonVolume.onClick { listener.onVolumeClick(it) }
-                }
+            with(binding) {
+                root.onClick { getItem(layoutPosition)?.let { listener.onCardClick(it) } }
+                buttonVolume.onClick { getItem(layoutPosition)?.let { listener.onVolumeClick(it) } }
             }
         }
 

@@ -17,6 +17,8 @@
 
         <item name="alertDialogTheme">@style/DialogStyle</item>
         <item name="materialAlertDialogTheme">@style/DialogStyle</item>
+
+        <item name="popupMenuBackground">@drawable/bg_custom_menu</item>
     </style>
 
 </resources>

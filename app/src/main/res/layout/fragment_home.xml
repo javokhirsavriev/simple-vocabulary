@@ -49,25 +49,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewDivider" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/buttonFlashcards"
-        style="@style/NormalFabButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_24"
-        android:includeFontPadding="false"
-        android:letterSpacing="0.05"
-        android:paddingStart="@dimen/dp_16"
-        android:paddingEnd="@dimen/dp_20"
-        android:text="@string/flashcards"
-        android:textAllCaps="false"
-        android:textSize="@dimen/sp_16"
-        android:textStyle="bold"
-        app:icon="@drawable/ic_fitness"
-        app:iconGravity="textStart"
-        app:iconPadding="@dimen/dp_12"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:materialThemeOverlay="@style/ThemeFabAppWhite" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

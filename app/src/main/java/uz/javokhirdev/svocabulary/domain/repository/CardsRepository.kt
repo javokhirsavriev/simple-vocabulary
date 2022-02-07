@@ -19,21 +19,26 @@ class CardsRepository @Inject constructor(
     private val dispatcher: DispatcherProvider
 ) {
 
-    fun getCards(setId: Long): Flow<PagingData<CardEntity>> {
+    fun getCards(setId: Long, keyword: String): Flow<PagingData<CardEntity>> {
         return Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,
                 enablePlaceholders = false,
                 prefetchDistance = 3
             ),
-            pagingSourceFactory = { cardsDao.getWords(setId) }
+            pagingSourceFactory = {
+                cardsDao.getCards(
+                    setId = setId,
+                    keyword = "%$keyword%"
+                )
+            }
         ).flow
     }
 
     suspend fun getCardById(id: Long) = flow {
         emit(UIState.loading(true))
 
-        val set = cardsDao.getWordById(id)
+        val set = cardsDao.getCardById(id)
 
         emit(UIState.loading(false))
         emit(UIState.success(set))
@@ -54,13 +59,13 @@ class CardsRepository @Inject constructor(
         emit(UIState.failure(throwable.message.orEmpty()))
     }.flowOn(dispatcher.getIO())
 
-    suspend fun delete(obj: CardEntity) = flow {
+    suspend fun delete(cardId: Long) = flow {
         emit(UIState.loading(true))
 
-        cardsDao.delete(obj)
+        cardsDao.delete(cardId)
 
         emit(UIState.loading(false))
-        emit(UIState.success(obj))
+        emit(UIState.success(cardId))
     }.catch { throwable ->
         emit(UIState.loading(false))
         emit(UIState.failure(throwable.message.orEmpty()))

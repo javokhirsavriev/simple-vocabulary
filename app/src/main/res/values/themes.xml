@@ -16,6 +16,8 @@
 
         <item name="alertDialogTheme">@style/DialogStyle</item>
         <item name="materialAlertDialogTheme">@style/DialogStyle</item>
+
+        <item name="popupMenuBackground">@drawable/bg_custom_menu</item>
     </style>
 
     <!--Toolbar styles-->
@@ -94,7 +96,7 @@
     <!--Dialog styles-->
     <style name="DialogStyle" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="colorPrimary">@color/colorApp</item>
-        <item name="colorSecondary">@color/colorAppTransparent25</item>
+        <item name="colorSecondary">@color/colorAppTransparent30</item>
         <item name="colorSurface">@color/colorWhite</item>
         <item name="colorOnSurface">@color/colorBlack</item>
         <item name="dialogCornerRadius">@dimen/dp_12</item>

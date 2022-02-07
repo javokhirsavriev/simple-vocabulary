@@ -12,10 +12,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import uz.javokhirdev.svocabulary.data.UIState
-import uz.javokhirdev.svocabulary.data.db.sets.SetEntity
 import uz.javokhirdev.svocabulary.data.db.cards.CardEntity
-import uz.javokhirdev.svocabulary.domain.repository.SetsRepository
+import uz.javokhirdev.svocabulary.data.db.sets.SetEntity
 import uz.javokhirdev.svocabulary.domain.repository.CardsRepository
+import uz.javokhirdev.svocabulary.domain.repository.SetsRepository
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,8 +39,8 @@ class CardListVM @Inject constructor(
         }
     }
 
-    fun getCards(): Flow<PagingData<CardEntity>> =
-        cardsRepository.getCards(args.setId).cachedIn(viewModelScope)
+    fun getCards(keyword: String): Flow<PagingData<CardEntity>> =
+        cardsRepository.getCards(args.setId, keyword).cachedIn(viewModelScope)
 
     fun deleteSet() {
         viewModelScope.launch {

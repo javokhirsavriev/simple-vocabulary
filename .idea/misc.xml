@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bg_custom_menu.xml" value="0.1895" />
+        <entry key="app/src/main/res/drawable/bg_custom_menuu.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/bg_input.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/bg_ripple.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/bg_ripple_layout.xml" value="0.1895" />
@@ -11,6 +13,7 @@
         <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/ic_edit.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/ic_fitness.xml" value="0.187" />
+        <entry key="app/src/main/res/drawable/ic_more.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/ic_save.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/ic_volume_up.xml" value="0.187" />
@@ -24,6 +27,7 @@
         <entry key="app/src/main/res/layout/item_card.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/item_set.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/layout/item_word.xml" value="0.37552083333333336" />
+        <entry key="app/src/main/res/menu/menu_cards.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/menu/menu_home.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/menu/menu_words.xml" value="0.37552083333333336" />
       </map>

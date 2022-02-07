@@ -12,13 +12,12 @@ import kotlinx.coroutines.flow.collectLatest
 import uz.javokhirdev.extensions.*
 import uz.javokhirdev.svocabulary.R
 import uz.javokhirdev.svocabulary.data.UIState
-import uz.javokhirdev.svocabulary.data.db.sets.SetEntity
 import uz.javokhirdev.svocabulary.data.db.cards.CardEntity
+import uz.javokhirdev.svocabulary.data.db.sets.SetEntity
 import uz.javokhirdev.svocabulary.data.onFailure
 import uz.javokhirdev.svocabulary.data.onSuccess
 import uz.javokhirdev.svocabulary.databinding.FragmentCardListBinding
 import uz.javokhirdev.svocabulary.presentation.adapters.CardListAdapter
-import uz.javokhirdev.svocabulary.presentation.home.HomeFragmentDirections
 import uz.javokhirdev.svocabulary.utils.NOT_ID
 import uz.javokhirdev.svocabulary.utils.TTSManager
 import uz.javokhirdev.svocabulary.utils.showDialog
@@ -48,28 +47,37 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), CardListAdapter.
             toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
             toolbar.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
+                    R.id.addCard -> {
+                        navigateToCardDetail()
+                        true
+                    }
                     R.id.editSet -> {
-                        deleteOrEditSet(true)
+                        navigateToSetDetail()
                         true
                     }
                     R.id.deleteSet -> {
-                        deleteOrEditSet(false)
+                        deleteSet()
                         true
                     }
                     else -> false
                 }
             }
 
-            buttonAdd.onClick { navigateToCardDetail() }
+            rvCards.vertical().adapter = cardListAdapter
+
+            inputSearch.onTextChangeListener { getCards(this) }
+
+            buttonFlashcard.onClick { }
         }
 
         with(viewModel) {
             getSetById()
 
             repeatingJobOnStarted { set.collectLatest { onSetState(it) } }
-            repeatingJobOnStarted { getCards().collectLatest { cardListAdapter?.submitData(it) } }
             repeatingJobOnStarted { delete.collectLatest { onDeleteState(it) } }
         }
+
+        getCards()
     }
 
     override fun onDestroyView() {
@@ -86,12 +94,10 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), CardListAdapter.
     }
 
     private fun onSetState(uiState: UIState<SetEntity>) {
-        with(binding) {
-            uiState onSuccess {
-                setId = data?.id ?: NOT_ID
+        uiState onSuccess {
+            setId = data?.id ?: NOT_ID
 
-                toolbar.title = data?.title ?: getString(R.string.cards)
-            }
+            binding.toolbar.title = data?.title ?: getString(R.string.cards)
         }
     }
 
@@ -103,19 +109,22 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), CardListAdapter.
                 when (loadState) {
                     is LoadState.Loading -> {
                         rvCards.beGone()
+                        buttonFlashcard.hide()
                         loadingView.onLoading(true)
                     }
                     is LoadState.NotLoading -> {
                         if (cardListAdapter?.itemCount == 0) {
-                            loadingView.onFailure(getString(R.string.no_data))
+                            loadingView.onFailure()
                         } else {
                             rvCards.beVisible()
+                            buttonFlashcard.show()
                             loadingView.onLoading(false)
                         }
                     }
                     is LoadState.Error -> {
-                        loadingView.onFailure(getString(R.string.no_data))
+                        loadingView.onFailure()
                         rvCards.beGone()
+                        buttonFlashcard.hide()
                     }
                 }
             }
@@ -132,24 +141,22 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), CardListAdapter.
         }
     }
 
-    private fun deleteOrEditSet(isEditable: Boolean) {
-        when (setId != NOT_ID) {
-            true -> isEditable
-                .ifTrue {
-                    val direction = HomeFragmentDirections.homeToSetDetail(setId = setId)
-                    findNavController().navigate(direction)
-                }
-                .ifFalse {
-                    requireContext().showDialog(
-                        title = getString(R.string.delete_set),
-                        message = getString(R.string.delete_set_description),
-                        positiveText = getString(R.string.cancel),
-                        negativeText = getString(R.string.delete),
-                        cancelAction = { viewModel.deleteSet() }
-                    )
-                }
-            else -> {}
+    private fun getCards(keyword: String = "") {
+        with(viewModel) {
+            repeatingJobOnStarted {
+                getCards(keyword).collectLatest { cardListAdapter?.submitData(it) }
+            }
         }
+    }
+
+    private fun deleteSet() {
+        requireContext().showDialog(
+            title = getString(R.string.delete_set),
+            message = getString(R.string.delete_set_description),
+            positiveText = getString(R.string.cancel),
+            negativeText = getString(R.string.delete),
+            cancelAction = { viewModel.deleteSet() }
+        )
     }
 
     private fun navigateToCardDetail(cardId: Long = NOT_ID) {
@@ -157,6 +164,11 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), CardListAdapter.
             cardId = cardId,
             setId = setId
         )
+        findNavController().navigate(direction)
+    }
+
+    private fun navigateToSetDetail() {
+        val direction = CardListFragmentDirections.cardListToSetDetail(setId = setId)
         findNavController().navigate(direction)
     }
 }

@@ -32,6 +32,18 @@ class SetsRepository @Inject constructor(
         ).flow
     }
 
+    suspend fun getSetWithCards(id: Long) = flow {
+        emit(UIState.loading(true))
+
+        val set = setsDao.getSetWithCards(id)
+
+        emit(UIState.loading(false))
+        emit(UIState.success(set))
+    }.catch { throwable ->
+        emit(UIState.loading(false))
+        emit(UIState.failure(throwable.message.orEmpty()))
+    }.flowOn(dispatcher.getIO())
+
     suspend fun getSetById(id: Long) = flow {
         emit(UIState.loading(true))
 
@@ -60,7 +72,7 @@ class SetsRepository @Inject constructor(
         emit(UIState.loading(true))
 
         setsDao.delete(setId)
-        cardsDao.deleteWordsBySetId(setId)
+        cardsDao.deleteCardsBySetId(setId)
 
         emit(UIState.loading(false))
         emit(UIState.success(setId))
