@@ -1,4 +1,4 @@
-package uz.javokhirdev.svocabulary.presentation.setDetail
+package uz.javokhirdev.svocabulary.presentation.cardDetail
 
 import android.os.Bundle
 import android.view.View
@@ -10,21 +10,21 @@ import kotlinx.coroutines.flow.collectLatest
 import uz.javokhirdev.extensions.*
 import uz.javokhirdev.svocabulary.R
 import uz.javokhirdev.svocabulary.data.UIState
-import uz.javokhirdev.svocabulary.data.db.sets.SetEntity
+import uz.javokhirdev.svocabulary.data.db.cards.CardEntity
 import uz.javokhirdev.svocabulary.data.onFailure
 import uz.javokhirdev.svocabulary.data.onLoading
 import uz.javokhirdev.svocabulary.data.onSuccess
-import uz.javokhirdev.svocabulary.databinding.FragmentSetDetailBinding
+import uz.javokhirdev.svocabulary.databinding.FragmentCardDetailBinding
 
 @AndroidEntryPoint
-class SetDetailFragment : Fragment(R.layout.fragment_set_detail) {
+class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
 
-    private val binding by viewBinding(FragmentSetDetailBinding::bind)
+    private val binding by viewBinding(FragmentCardDetailBinding::bind)
 
-    private val viewModel by viewModels<SetDetailVM>()
+    private val viewModel by viewModels<CardDetailVM>()
 
-    private var title = ""
-    private var description = ""
+    private var term = ""
+    private var definition = ""
     private var isNewCreate = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,15 +33,15 @@ class SetDetailFragment : Fragment(R.layout.fragment_set_detail) {
         with(binding) {
             toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
 
-            inputTitle.onTextChangeListener { title = this }
-            inputDescription.onTextChangeListener { description = this }
+            inputTerm.onTextChangeListener { term = this }
+            inputDefinition.onTextChangeListener { definition = this }
 
-            buttonSave.onClick { createSet() }
+            buttonSave.onClick { createCard() }
         }
 
         with(viewModel) {
             repeatingJobOnStarted {
-                set.collectLatest { onSetState(it) }
+                card.collectLatest { onCardState(it) }
             }
 
             repeatingJobOnStarted {
@@ -50,17 +50,17 @@ class SetDetailFragment : Fragment(R.layout.fragment_set_detail) {
         }
     }
 
-    private fun onSetState(uiState: UIState<SetEntity>) {
+    private fun onCardState(uiState: UIState<CardEntity>) {
         with(binding) {
             uiState onLoading {
                 buttonSave.onLoading(isLoading)
             } onSuccess {
-                setSetData(data)
+                setCardData(data)
             }
         }
     }
 
-    private fun onCreateState(uiState: UIState<SetEntity>) {
+    private fun onCreateState(uiState: UIState<CardEntity>) {
         with(binding) {
             uiState onLoading {
                 buttonSave.onLoading(isLoading)
@@ -72,32 +72,37 @@ class SetDetailFragment : Fragment(R.layout.fragment_set_detail) {
         }
     }
 
-    private fun setSetData(obj: SetEntity? = null) {
-        title = obj?.title.orEmpty()
-        description = obj?.description.orEmpty()
+    private fun setCardData(obj: CardEntity? = null) {
+        term = obj?.term.orEmpty()
+        definition = obj?.definition.orEmpty()
         isNewCreate = obj.isNull()
 
-        val toolbarTitle = if (isNewCreate) R.string.create_set else R.string.edit_set
+        val toolbarTitle = if (isNewCreate) R.string.create_card else R.string.edit_card
         val buttonText = if (isNewCreate) R.string.save else R.string.edit
         val buttonIcon = if (isNewCreate) R.drawable.ic_save else R.drawable.ic_edit
 
         with(binding) {
             toolbar.setTitle(toolbarTitle)
 
-            inputTitle.setText(title)
-            inputDescription.setText(description)
+            inputTerm.setText(term)
+            inputDefinition.setText(definition)
 
             buttonSave.setButtonText(getString(buttonText))
             buttonSave.setIconResource(buttonIcon)
         }
     }
 
-    private fun createSet() {
-        if (title.trim().isEmpty()) {
-            toast(R.string.please_enter_title)
+    private fun createCard() {
+        if (term.trim().isEmpty()) {
+            toast(R.string.please_enter_term)
             return
         }
 
-        viewModel.createSet(isNewCreate, title, description)
+        if (definition.trim().isEmpty()) {
+            toast(R.string.please_enter_definition)
+            return
+        }
+
+        viewModel.createCard(isNewCreate, term, definition)
     }
 }

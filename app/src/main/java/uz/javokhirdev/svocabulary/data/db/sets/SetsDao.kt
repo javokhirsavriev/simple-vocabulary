@@ -24,6 +24,6 @@ interface SetsDao {
         if (id == -1L) update(obj)
     }
 
-    @Delete
-    suspend fun delete(obj: SetEntity)
+    @Query("DELETE FROM sets WHERE set_id = :setId")
+    suspend fun delete(setId: Long)
 }

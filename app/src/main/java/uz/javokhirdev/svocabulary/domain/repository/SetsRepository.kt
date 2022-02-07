@@ -10,14 +10,14 @@ import kotlinx.coroutines.flow.flowOn
 import uz.javokhirdev.svocabulary.data.UIState
 import uz.javokhirdev.svocabulary.data.db.sets.SetEntity
 import uz.javokhirdev.svocabulary.data.db.sets.SetsDao
-import uz.javokhirdev.svocabulary.data.db.words.WordsDao
+import uz.javokhirdev.svocabulary.data.db.cards.CardsDao
 import uz.javokhirdev.svocabulary.utils.DispatcherProvider
 import uz.javokhirdev.svocabulary.utils.PAGE_SIZE
 import javax.inject.Inject
 
 class SetsRepository @Inject constructor(
     private val setsDao: SetsDao,
-    private val wordsDao: WordsDao,
+    private val cardsDao: CardsDao,
     private val dispatcher: DispatcherProvider
 ) {
 
@@ -56,14 +56,14 @@ class SetsRepository @Inject constructor(
         emit(UIState.failure(throwable.message.orEmpty()))
     }.flowOn(dispatcher.getIO())
 
-    suspend fun delete(obj: SetEntity) = flow {
+    suspend fun delete(setId: Long) = flow {
         emit(UIState.loading(true))
 
-        setsDao.delete(obj)
-        wordsDao.deleteWordsBySetId(obj.id)
+        setsDao.delete(setId)
+        cardsDao.deleteWordsBySetId(setId)
 
         emit(UIState.loading(false))
-        emit(UIState.success(obj))
+        emit(UIState.success(setId))
     }.catch { throwable ->
         emit(UIState.loading(false))
         emit(UIState.failure(throwable.message.orEmpty()))
