@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="simple-vocabulary.app" target="11" />
+      <module name="simple-vocabulary.base" target="11" />
+      <module name="simple-vocabulary.components" target="11" />
+      <module name="simple-vocabulary.database" target="11" />
+      <module name="simple-vocabulary.repository" target="11" />
+      <module name="simple-vocabulary.resources" target="11" />
+      <module name="simple-vocabulary.ui-carddetail" target="11" />
+      <module name="simple-vocabulary.ui-cards" target="11" />
+      <module name="simple-vocabulary.ui-flashcards" target="11" />
+      <module name="simple-vocabulary.ui-setdetail" target="11" />
+      <module name="simple-vocabulary.ui-sets" target="11" />
+      <module name="simple-vocabulary.utils" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

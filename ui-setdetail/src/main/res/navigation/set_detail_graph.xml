@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setDetail"
+    app:startDestination="@id/setDetailFragment">
+
+    <fragment
+        android:id="@+id/setDetailFragment"
+        android:name="uz.javokhirdev.svocabulary.presentation.setdetail.SetDetailFragment"
+        android:label="@string/study_sets"
+        tools:layout="@layout/fragment_set_detail">
+        <argument
+            android:name="setId"
+            android:defaultValue="-1L"
+            app:argType="long" />
+    </fragment>
+
+</navigation>

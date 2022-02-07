@@ -1,0 +1,21 @@
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "kotlin-kapt"
+    id "dagger.hilt.android.plugin"
+}
+
+apply from: "../configs.gradle"
+
+dependencies {
+    implementation project(":components")
+    implementation project(":data")
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
+
+    implementation "com.github.javokhirsavriev:common-extensions:$commonExtensionsVersion"
+}

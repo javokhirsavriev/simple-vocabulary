@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardList"
+    app:startDestination="@id/cardListFragment">
+
+    <include app:graph="@navigation/card_detail_graph" />
+    <include app:graph="@navigation/set_detail_graph" />
+
+    <fragment
+        android:id="@+id/cardListFragment"
+        android:name="uz.javokhirdev.svocabulary.presentation.cards.CardListFragment"
+        android:label="@string/cards"
+        tools:layout="@layout/fragment_card_list">
+        <action
+            android:id="@+id/cardListToSetDetail"
+            app:destination="@id/setDetail"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
+            <argument
+                android:name="setId"
+                android:defaultValue="-1L"
+                app:argType="long" />
+        </action>
+        <action
+            android:id="@+id/cardListToDetail"
+            app:destination="@id/cardDetail"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
+            <argument
+                android:name="cardId"
+                android:defaultValue="-1L"
+                app:argType="long" />
+            <argument
+                android:name="setId"
+                android:defaultValue="-1L"
+                app:argType="long" />
+        </action>
+        <argument
+            android:name="setId"
+            android:defaultValue="-1L"
+            app:argType="long" />
+    </fragment>
+
+</navigation>

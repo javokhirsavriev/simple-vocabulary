@@ -1,0 +1,21 @@
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "kotlin-kapt"
+    id "dagger.hilt.android.plugin"
+}
+
+apply from: "../configs.gradle"
+
+dependencies {
+    implementation project(":data")
+    implementation project(":database")
+    implementation project(":utils")
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+
+    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
+
+    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
+}

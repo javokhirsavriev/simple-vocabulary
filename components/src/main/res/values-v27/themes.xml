@@ -1,0 +1,25 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="Theme.SimpleVocabulary" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorApp</item>
+        <item name="colorPrimaryDark">@color/colorDarkBlack</item>
+        <item name="colorAccent">@color/colorApp</item>
+        <item name="colorError">@color/colorRed</item>
+
+        <item name="android:navigationBarColor">@color/colorWhite</item>
+        <item name="android:statusBarColor">@color/colorWhite</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="android:windowBackground">@color/colorGray100</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:autofilledHighlight">@color/colorTransparent</item>
+
+        <item name="alertDialogTheme">@style/DialogStyle</item>
+        <item name="materialAlertDialogTheme">@style/DialogStyle</item>
+
+        <item name="popupMenuBackground">@drawable/bg_custom_menu</item>
+    </style>
+
+</resources>
