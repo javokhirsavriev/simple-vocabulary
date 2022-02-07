@@ -14,6 +14,7 @@ import uz.javokhirdev.svocabulary.R
 import uz.javokhirdev.svocabulary.data.db.sets.SetEntity
 import uz.javokhirdev.svocabulary.databinding.FragmentHomeBinding
 import uz.javokhirdev.svocabulary.presentation.adapters.SetListAdapter
+import uz.javokhirdev.svocabulary.utils.NOT_ID
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home), SetListAdapter.SetListener {
@@ -85,12 +86,12 @@ class HomeFragment : Fragment(R.layout.fragment_home), SetListAdapter.SetListene
     }
 
     private fun navigateToSetDetail() {
-        val direction = HomeFragmentDirections.homeToSetDetail(isNewCreate = true)
+        val direction = HomeFragmentDirections.homeToSetDetail(setId = NOT_ID)
         findNavController().navigate(direction)
     }
 
     private fun navigateToWordList(item: SetEntity) {
-        val direction = HomeFragmentDirections.homeToWordList()
+        val direction = HomeFragmentDirections.homeToCardList(setId = item.id)
         findNavController().navigate(direction)
     }
 }

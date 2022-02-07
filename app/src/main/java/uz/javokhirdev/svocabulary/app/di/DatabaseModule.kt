@@ -9,7 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import uz.javokhirdev.svocabulary.data.db.AppDatabase
 import uz.javokhirdev.svocabulary.data.db.sets.SetsDao
-import uz.javokhirdev.svocabulary.data.db.words.WordsDao
+import uz.javokhirdev.svocabulary.data.db.cards.CardsDao
 import javax.inject.Singleton
 
 @Module
@@ -27,5 +27,5 @@ class DatabaseModule {
     fun provideSetsDao(appDatabase: AppDatabase): SetsDao = appDatabase.setsDao()
 
     @[Singleton Provides]
-    fun provideWordsDao(appDatabase: AppDatabase): WordsDao = appDatabase.wordsDao()
+    fun provideCardsDao(appDatabase: AppDatabase): CardsDao = appDatabase.cardsDao()
 }

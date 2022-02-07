@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="uz.javokhirdev.svocabulary.presentation.home.HomeFragment"
-        android:label="@string/all_sets"
+        android:label="@string/study_sets"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/homeToSetDetail"
@@ -18,8 +18,8 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
-            android:id="@+id/homeToWordList"
-            app:destination="@id/wordListFragment"
+            android:id="@+id/homeToCardList"
+            app:destination="@id/cardListFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -29,43 +29,52 @@
     <fragment
         android:id="@+id/setDetailFragment"
         android:name="uz.javokhirdev.svocabulary.presentation.setDetail.SetDetailFragment"
-        android:label="@string/all_sets"
+        android:label="@string/study_sets"
         tools:layout="@layout/fragment_set_detail">
         <argument
-            android:name="isNewCreate"
-            android:defaultValue="false"
-            app:argType="boolean" />
-        <argument
-            android:name="id"
-            android:defaultValue="0L"
+            android:name="setId"
+            android:defaultValue="-1L"
             app:argType="long" />
-        <argument
-            android:name="title"
-            android:defaultValue=""
-            app:argType="string" />
-        <argument
-            android:name="description"
-            android:defaultValue=""
-            app:argType="string" />
     </fragment>
 
     <fragment
-        android:id="@+id/wordListFragment"
-        android:name="uz.javokhirdev.svocabulary.presentation.wordList.WordListFragment"
-        android:label="@string/all_words"
-        tools:layout="@layout/fragment_word_list">
+        android:id="@+id/cardListFragment"
+        android:name="uz.javokhirdev.svocabulary.presentation.cardList.CardListFragment"
+        android:label="@string/cards"
+        tools:layout="@layout/fragment_card_list">
         <action
-            android:id="@+id/wordListToDetail"
-            app:destination="@id/wordDetailFragment"
+            android:id="@+id/cardListToSetDetail"
+            app:destination="@id/setDetailFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/cardListToDetail"
+            app:destination="@id/cardDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="setId"
+            android:defaultValue="-1L"
+            app:argType="long" />
     </fragment>
 
     <fragment
-        android:id="@+id/wordDetailFragment"
-        android:name="uz.javokhirdev.svocabulary.presentation.wordDetail.WordDetailFragment"
-        android:label="@string/all_words"
-        tools:layout="@layout/fragment_word_detail" />
+        android:id="@+id/cardDetailFragment"
+        android:name="uz.javokhirdev.svocabulary.presentation.cardDetail.CardDetailFragment"
+        android:label="@string/cards"
+        tools:layout="@layout/fragment_card_detail">
+        <argument
+            android:name="cardId"
+            android:defaultValue="-1L"
+            app:argType="long" />
+        <argument
+            android:name="setId"
+            android:defaultValue="-1L"
+            app:argType="long" />
+    </fragment>
+
 </navigation>

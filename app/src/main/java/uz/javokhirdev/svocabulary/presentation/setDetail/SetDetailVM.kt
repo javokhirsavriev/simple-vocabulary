@@ -1,5 +1,6 @@
 package uz.javokhirdev.svocabulary.presentation.setDetail
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,14 +15,43 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SetDetailVM @Inject constructor(
-    private val repository: SetsRepository
+    private val repository: SetsRepository,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+
+    private val args = SetDetailFragmentArgs.fromSavedStateHandle(savedStateHandle)
+
+    private val setData = MutableStateFlow<UIState<SetEntity>>(UIState.Idle)
+    val set = setData.asStateFlow()
 
     private val createData = MutableStateFlow<UIState<SetEntity>>(UIState.Idle)
     val create = createData.asStateFlow()
 
-    fun createSet(entity: SetEntity) {
+    init {
+        getSetById()
+    }
+
+    private fun getSetById() {
         viewModelScope.launch {
+            repository.getSetById(args.setId).collectLatest { setData.value = it }
+        }
+    }
+
+    fun createSet(isNewCreate: Boolean, title: String, description: String) {
+        viewModelScope.launch {
+            val entity = if (isNewCreate) {
+                SetEntity(
+                    title = title.trim(),
+                    description = description.trim()
+                )
+            } else {
+                SetEntity(
+                    id = args.setId,
+                    title = title.trim(),
+                    description = description.trim()
+                )
+            }
+
             repository.insertOrUpdate(entity).collectLatest { createData.value = it }
         }
     }
