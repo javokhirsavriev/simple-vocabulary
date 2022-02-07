@@ -14,7 +14,7 @@
         android:theme="@style/Theme.SimpleVocabulary"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".presentation.HomeActivity"
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

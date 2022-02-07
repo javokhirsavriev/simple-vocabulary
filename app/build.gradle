@@ -6,15 +6,12 @@ plugins {
     id "dagger.hilt.android.plugin"
 }
 
-android {
-    compileSdk 31
+apply from: "../configs.gradle"
+apply from: "../versions.gradle"
 
+android {
     defaultConfig {
         applicationId "uz.javokhirdev.svocabulary"
-        minSdk 21
-        targetSdk 31
-        versionCode 1
-        versionName "1.0"
     }
 
     buildTypes {
@@ -24,60 +21,21 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-        freeCompilerArgs += [
-                "-Xopt-in=kotlin.RequiresOptIn",
-                "-Xuse-experimental=kotlinx.coroutines.DelicateCoroutinesApi",
-                "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
-                "-Xuse-experimental=kotlinx.coroutines.ObsoleteCoroutinesApi"
-        ]
-    }
-
-    kotlin {
-        experimental {
-            coroutines "enable"
-        }
-    }
-
-    buildFeatures {
-        viewBinding true
-    }
 }
 
 dependencies {
-    /* JetBrains (Kotlin) libraries */
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation project(":components")
+    implementation project(":ui-sets")
 
     /* Android libraries */
-    implementation "androidx.core:core-ktx:$coreKtxVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swiperefreshlayoutVersion"
     implementation "androidx.activity:activity-ktx:$activityKtxVersion"
-    implementation "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleExtVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
-    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
-    implementation "androidx.room:room-paging:$roomVersion"
-    implementation "androidx.room:room-runtime:$roomVersion"
-    implementation "androidx.room:room-ktx:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
 
     /* Google libraries */
-    implementation "com.google.android.material:material:$materialVersion"
-    implementation "com.google.code.gson:gson:$gsonVersion"
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
 
-    implementation "com.github.javokhirsavriev:common-extensions:1.0.6"
+    implementation "com.github.javokhirsavriev:common-extensions:$commonExtensionsVersion"
 }

@@ -1,0 +1,44 @@
+apply from: "../versions.gradle"
+def config = extensions.getByName("ext")
+
+android {
+    compileSdk config["targetSdk"]
+
+    defaultConfig {
+        minSdk config["minSdk"]
+        targetSdk config["targetSdk"]
+        versionCode config["versionCode"]
+        versionName config["versionName"]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs += [
+                "-Xopt-in=kotlin.RequiresOptIn",
+                "-Xuse-experimental=kotlinx.coroutines.DelicateCoroutinesApi",
+                "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-Xuse-experimental=kotlinx.coroutines.ObsoleteCoroutinesApi"
+        ]
+    }
+
+    kotlin {
+        experimental {
+            coroutines "enable"
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}

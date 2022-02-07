@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bg_custom_menu.xml" value="0.1895" />
+        <entry key="app/src/main/res/drawable/bg_custom_menuu.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/bg_input.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/bg_ripple.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/bg_ripple_layout.xml" value="0.1895" />
@@ -11,9 +13,11 @@
         <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/ic_edit.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/ic_fitness.xml" value="0.187" />
+        <entry key="app/src/main/res/drawable/ic_more.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/ic_save.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/ic_volume_up.xml" value="0.187" />
+        <entry key="app/src/main/res/layout/activity_flashcards.xml" value="0.34479166666666666" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/layout/fragment_card_detail.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/layout/fragment_card_list.xml" value="0.37552083333333336" />
@@ -24,12 +28,29 @@
         <entry key="app/src/main/res/layout/item_card.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/item_set.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/layout/item_word.xml" value="0.37552083333333336" />
+        <entry key="app/src/main/res/menu/menu_cards.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/menu/menu_home.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/menu/menu_words.xml" value="0.37552083333333336" />
+        <entry key="resources/src/main/res/drawable/bg_custom_menu.xml" value="0.1975" />
+        <entry key="resources/src/main/res/layout/fragment_card_detail.xml" value="0.37552083333333336" />
+        <entry key="resources/src/main/res/layout/fragment_card_list.xml" value="0.37552083333333336" />
+        <entry key="resources/src/main/res/layout/fragment_set_detail.xml" value="0.37552083333333336" />
+        <entry key="resources/src/main/res/layout/fragment_set_list.xml" value="0.37552083333333336" />
+        <entry key="resources/src/main/res/menu/menu_cards.xml" value="0.3609375" />
+        <entry key="resources/src/main/res/menu/menu_home.xml" value="0.3609375" />
+        <entry key="ui-carddetail/src/main/res/layout/fragment_card_detail.xml" value="0.37552083333333336" />
+        <entry key="ui-cards/src/main/res/layout/fragment_card_detail.xml" value="0.3609375" />
+        <entry key="ui-cards/src/main/res/layout/fragment_card_list.xml" value="0.3609375" />
+        <entry key="ui-cards/src/main/res/layout/item_card.xml" value="0.3609375" />
+        <entry key="ui-flashcards/src/main/res/layout/activity_flashcards.xml" value="0.3609375" />
+        <entry key="ui-setdetail/src/main/res/layout/fragment_set_detail.xml" value="0.3609375" />
+        <entry key="ui-sets/src/main/res/layout/fragment_set_detail.xml" value="0.3609375" />
+        <entry key="ui-sets/src/main/res/layout/fragment_set_list.xml" value="0.3609375" />
+        <entry key="ui-sets/src/main/res/layout/item_set.xml" value="0.3609375" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

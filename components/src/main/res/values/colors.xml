@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <color name="colorApp">#48B6D2</color>
+    <color name="colorAppTransparent30">#4D48B6D2</color>
+    <color name="colorBlack">#181818</color>
+    <color name="colorDarkBlack">#000000</color>
+    <color name="colorGray100">#F5F5F5</color>
+    <color name="colorGray200">#EEEEEE</color>
+    <color name="colorGray400">#BDBDBD</color>
+    <color name="colorGray500">#9E9E9E</color>
+    <color name="colorRed">#F44336</color>
+    <color name="colorRedTransparent30">#4DF44336</color>
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+</resources>
