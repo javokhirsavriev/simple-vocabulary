@@ -551,6 +551,11 @@ public class FlipView extends FrameLayout {
         loadAnimations();
     }
 
+    public void flip() {
+        flipTypeFrom = "left";
+        loadAnimations();
+    }
+
     public String getFlipTypeFrom() {
         return flipTypeFrom;
     }

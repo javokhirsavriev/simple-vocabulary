@@ -30,9 +30,9 @@ class FlashcardsActivity : AppCompatActivity() {
 
         with(viewModel) {
             repeatingJobOnStarted { isFlashcardStarted.collectLatest { onFlashcardStartedState(it) } }
+            repeatingJobOnStarted { cards.collectLatest { onCardsState(it) } }
+            repeatingJobOnStarted { currentCard.collectLatest { onCurrentCardState(it) } }
 
-            cards.observe(this@FlashcardsActivity) { onCardsState(it) }
-            currentCard.observe(this@FlashcardsActivity) { onCurrentCardState(it) }
             count.observe(this@FlashcardsActivity) { onCountState(it) }
             finished.observe(this@FlashcardsActivity) { onFinishedState(it) }
         }
@@ -150,6 +150,8 @@ class FlashcardsActivity : AppCompatActivity() {
 
     private fun setCurrentTermDefinition(data: CardModel? = null) {
         with(binding) {
+            if (flipView.isBackSide) flipView.flipTheView()
+
             textFront.text = data?.term.orEmpty()
             textBack.text = data?.definition.orEmpty()
         }

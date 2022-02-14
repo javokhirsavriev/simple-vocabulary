@@ -26,7 +26,7 @@
                 style="@style/InputView"
                 android:hint="@string/enter_title"
                 android:importantForAutofill="no"
-                android:maxLength="20" />
+                android:maxLength="40" />
 
             <EditText
                 android:id="@+id/inputDescription"
@@ -34,7 +34,7 @@
                 android:layout_marginTop="@dimen/dp_16"
                 android:hint="@string/enter_description"
                 android:importantForAutofill="no"
-                android:maxLength="40" />
+                android:maxLength="60" />
 
             <uz.javokhirdev.svocabulary.presentation.components.IndicatorButton
                 android:id="@+id/buttonSave"

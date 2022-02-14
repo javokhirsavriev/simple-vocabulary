@@ -29,11 +29,11 @@ class FlashcardsVM @Inject constructor(
     private val isFlashcardStartedData = MutableStateFlow<UIState<Boolean>>(UIState.Idle)
     val isFlashcardStarted = isFlashcardStartedData.asStateFlow()
 
-    private val cardsData = MutableLiveData<UIState<List<CardModel>>>(UIState.Idle)
-    val cards: LiveData<UIState<List<CardModel>>> get() = cardsData
+    private val cardsData = MutableStateFlow<UIState<List<CardModel>>>(UIState.Idle)
+    val cards = cardsData.asStateFlow()
 
-    private val currentCardData = MutableLiveData<UIState<CardModel>>(UIState.Idle)
-    val currentCard: LiveData<UIState<CardModel>> get() = currentCardData
+    private val currentCardData = MutableStateFlow<UIState<CardModel>>(UIState.Idle)
+    val currentCard = currentCardData.asStateFlow()
 
     private val countData = MutableLiveData<CountData>()
     val count: LiveData<CountData> get() = countData
@@ -87,6 +87,8 @@ class FlashcardsVM @Inject constructor(
 
     private fun finishFlashcards() {
         currentPosition = 0
+        currentCardData.value = UIState.Idle
+
         val countData = getCountData()
 
         finishedData.value = FinishedData(
@@ -98,7 +100,7 @@ class FlashcardsVM @Inject constructor(
     }
 
     fun correctCurrentTerm(isCorrect: Boolean) {
-        currentCard.value?.onSuccess {
+        currentCardData.value onSuccess {
             data?.let { card ->
                 if (isCorrect) {
                     correctCards.add(card)
@@ -113,7 +115,7 @@ class FlashcardsVM @Inject constructor(
     }
 
     fun sayCurrentTerm() {
-        currentCard.value?.onSuccess {
+        currentCardData.value onSuccess {
             ttsManager.say((data?.term ?: data?.definition).orEmpty())
         }
     }
