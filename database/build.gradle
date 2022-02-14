@@ -8,11 +8,14 @@ plugins {
 apply from: "../configs.gradle"
 
 dependencies {
+
+    /* Android libraries */
     implementation "androidx.room:room-paging:$roomVersion"
     implementation "androidx.room:room-runtime:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
 
+    /* Google libraries */
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
 }

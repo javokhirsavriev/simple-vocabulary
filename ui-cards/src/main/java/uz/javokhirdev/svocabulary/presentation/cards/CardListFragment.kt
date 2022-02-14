@@ -1,5 +1,6 @@
 package uz.javokhirdev.svocabulary.presentation.cards
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -11,12 +12,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import uz.javokhirdev.extensions.*
 import uz.javokhirdev.svocabulary.data.NOT_ID
+import uz.javokhirdev.svocabulary.data.SET_ID
 import uz.javokhirdev.svocabulary.data.UIState
 import uz.javokhirdev.svocabulary.data.model.CardModel
 import uz.javokhirdev.svocabulary.data.model.SetModel
 import uz.javokhirdev.svocabulary.data.onSuccess
 import uz.javokhirdev.svocabulary.presentation.components.R
 import uz.javokhirdev.svocabulary.presentation.components.databinding.FragmentCardListBinding
+import uz.javokhirdev.svocabulary.presentation.flashcards.FlashcardsActivity
 import uz.javokhirdev.svocabulary.utils.TTSManager
 import uz.javokhirdev.svocabulary.utils.showDialog
 import javax.inject.Inject
@@ -65,7 +68,7 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), CardListAdapter.
 
             inputSearch.onTextChangeListener { getCards(this) }
 
-            buttonFlashcard.onClick { }
+            buttonFlashcard.onClick { navigateToFlashcards() }
         }
 
         with(viewModel) {
@@ -166,5 +169,11 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), CardListAdapter.
     private fun navigateToSetDetail() {
         val direction = CardListFragmentDirections.cardListToSetDetail(setId = setId)
         findNavController().navigate(direction)
+    }
+
+    private fun navigateToFlashcards() {
+        val intent = Intent(requireActivity(), FlashcardsActivity::class.java)
+        intent.putExtra(SET_ID, setId)
+        startActivity(intent)
     }
 }

@@ -67,7 +67,7 @@ class SetDetailFragment : Fragment(R.layout.fragment_set_detail) {
     private fun setSetData(obj: SetModel? = null) {
         title = obj?.title.orEmpty()
         description = obj?.description.orEmpty()
-        isNewCreate = obj.isNull()
+        isNewCreate = obj?.id.isNull()
 
         val toolbarTitle = if (isNewCreate) R.string.create_set else R.string.edit_set
         val buttonText = if (isNewCreate) R.string.save else R.string.edit

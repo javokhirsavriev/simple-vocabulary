@@ -11,11 +11,14 @@ dependencies {
     implementation project(":components")
     implementation project(":data")
 
+    /* JetBrains (Kotlin) libraries */
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
 
+    /* Google libraries */
     implementation "com.google.android.material:material:$materialVersion"
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
 
+    /* Other libraries */
     implementation "com.github.javokhirsavriev:common-extensions:$commonExtensionsVersion"
 }

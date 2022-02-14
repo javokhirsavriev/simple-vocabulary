@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/LayoutVertical"
+    android:padding="@dimen/dp_20">
+
+    <View
+        android:layout_width="@dimen/dp_42"
+        android:layout_height="@dimen/dp_6"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bg_custom_menu"
+        android:backgroundTint="@color/colorGray300" />
+
+    <TextView
+        style="@style/Text20sp"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="@string/quiz_tips" />
+
+    <LinearLayout
+        style="@style/LayoutHorizontal"
+        android:layout_marginTop="@dimen/dp_20"
+        android:gravity="center_vertical">
+
+        <ImageView
+            style="@style/ImageBase"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_36"
+            android:background="@drawable/bg_oval"
+            android:backgroundTint="@color/colorApp"
+            android:contentDescription="@string/content_description"
+            android:padding="@dimen/dp_4"
+            android:src="@drawable/ic_rotation" />
+
+        <LinearLayout
+            style="@style/LayoutVertical"
+            android:layout_marginStart="@dimen/dp_16">
+
+            <TextView
+                style="@style/Text18sp"
+                android:text="@string/tap_the_card"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/Text16sp"
+                android:layout_marginTop="@dimen/dp_4"
+                android:text="@string/view_the_reverse_side" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/LayoutHorizontal"
+        android:layout_marginTop="@dimen/dp_20"
+        android:gravity="center_vertical">
+
+        <ImageView
+            style="@style/ImageBase"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_36"
+            android:background="@drawable/bg_oval"
+            android:backgroundTint="@color/colorGreen"
+            android:contentDescription="@string/content_description"
+            android:padding="@dimen/dp_4"
+            android:src="@drawable/ic_done" />
+
+        <LinearLayout
+            style="@style/LayoutVertical"
+            android:layout_marginStart="@dimen/dp_16">
+
+            <TextView
+                style="@style/Text18sp"
+                android:text="@string/tap_the_green_button"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/Text16sp"
+                android:layout_marginTop="@dimen/dp_4"
+                android:text="@string/mark_the_card_as_known" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/LayoutHorizontal"
+        android:layout_marginTop="@dimen/dp_20"
+        android:gravity="center_vertical">
+
+        <ImageView
+            style="@style/ImageBase"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_36"
+            android:background="@drawable/bg_oval"
+            android:backgroundTint="@color/colorRed"
+            android:contentDescription="@string/content_description"
+            android:padding="@dimen/dp_4"
+            android:src="@drawable/ic_close" />
+
+        <LinearLayout
+            style="@style/LayoutVertical"
+            android:layout_marginStart="@dimen/dp_16">
+
+            <TextView
+                style="@style/Text18sp"
+                android:text="@string/tap_the_red_button"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/Text16sp"
+                android:layout_marginTop="@dimen/dp_4"
+                android:text="@string/continue_studying_the_card" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <uz.javokhirdev.svocabulary.presentation.components.IndicatorButton
+        android:id="@+id/buttonOk"
+        style="@style/UnelevatedButtonStyle"
+        android:layout_marginTop="@dimen/dp_24"
+        app:buttonText="@string/ok" />
+</LinearLayout>

@@ -2,33 +2,31 @@ plugins {
     id "com.android.library"
     id "org.jetbrains.kotlin.android"
     id "kotlin-kapt"
-    id "androidx.navigation.safeargs.kotlin"
     id "dagger.hilt.android.plugin"
 }
 
 apply from: "../configs.gradle"
 
 dependencies {
+    implementation project(":base")
     implementation project(":components")
     implementation project(":data")
+    implementation project(":preferences")
     implementation project(":repository")
+    implementation project(":utils")
 
+    /* JetBrains (Kotlin) libraries */
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
 
-    implementation "androidx.core:core-ktx:$coreKtxVersion"
+    /* Android libraries */
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
-    implementation "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleExtVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
-    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
-    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
+    implementation "androidx.activity:activity-ktx:$activityKtxVersion"
 
+    /* Google libraries */
     implementation "com.google.android.material:material:$materialVersion"
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
 
+    /* Other libraries */
     implementation "com.github.javokhirsavriev:common-extensions:$commonExtensionsVersion"
 }

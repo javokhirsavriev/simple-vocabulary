@@ -43,6 +43,28 @@ class CardsRepository @Inject constructor(
         }
     }
 
+    suspend fun getCards(id: Long) = flow {
+        emit(UIState.loading(true))
+
+        val entity = cardsDao
+            .getCards(id)
+            .map { entity ->
+                CardModel(
+                    id = entity.id,
+                    setId = entity.setId,
+                    term = entity.term,
+                    definition = entity.definition
+                )
+            }
+            .shuffled()
+
+        emit(UIState.loading(false))
+        emit(UIState.success(entity))
+    }.catch { throwable ->
+        emit(UIState.loading(false))
+        emit(UIState.failure(throwable.message.orEmpty()))
+    }.flowOn(dispatcher.getIO())
+
     suspend fun getCardById(id: Long) = flow {
         emit(UIState.loading(true))
 

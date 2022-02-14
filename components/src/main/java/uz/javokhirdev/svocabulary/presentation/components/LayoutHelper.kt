@@ -39,39 +39,6 @@ object LayoutHelper {
         )
     }
 
-    /* ConstraintLayout */
-    fun createConstraint(
-        context: Context,
-        width: Int = WRAP_CONTENT,
-        height: Int = WRAP_CONTENT
-    ): ConstraintLayout.LayoutParams {
-        return ConstraintLayout.LayoutParams(
-            getSize(context, width),
-            getSize(context, height)
-        )
-    }
-
-    fun createConstraint(
-        context: Context,
-        width: Int = WRAP_CONTENT,
-        height: Int = WRAP_CONTENT,
-        leftMargin: Int = 0,
-        topMargin: Int = 0,
-        rightMargin: Int = 0,
-        bottomMargin: Int = 0,
-    ): ConstraintLayout.LayoutParams {
-        val layoutParams = ConstraintLayout.LayoutParams(
-            getSize(context, width),
-            getSize(context, height)
-        )
-
-        layoutParams.leftMargin = context.dpToPx(leftMargin)
-        layoutParams.topMargin = context.dpToPx(topMargin)
-        layoutParams.rightMargin = context.dpToPx(rightMargin)
-        layoutParams.bottomMargin = context.dpToPx(bottomMargin)
-        return layoutParams
-    }
-
     /* LinearLayout */
     fun createLinear(
         context: Context,

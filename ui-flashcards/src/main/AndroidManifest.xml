@@ -7,4 +7,5 @@
             android:name=".FlashcardsActivity"
             android:exported="false" />
     </application>
+
 </manifest>

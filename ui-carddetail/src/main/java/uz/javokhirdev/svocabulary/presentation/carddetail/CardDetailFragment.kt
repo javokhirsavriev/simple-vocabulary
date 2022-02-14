@@ -87,7 +87,7 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
     private fun setCardData(obj: CardModel? = null) {
         term = obj?.term.orEmpty()
         definition = obj?.definition.orEmpty()
-        isNewCreate = obj.isNull()
+        isNewCreate = obj?.id.isNull()
 
         val toolbarTitle = if (isNewCreate) R.string.create_card else R.string.edit_card
         val buttonText = if (isNewCreate) R.string.save else R.string.edit

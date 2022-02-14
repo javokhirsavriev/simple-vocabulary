@@ -39,10 +39,7 @@
             <uz.javokhirdev.svocabulary.presentation.components.IndicatorButton
                 android:id="@+id/buttonSave"
                 style="@style/UnelevatedButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_24"
-                app:iconGravity="textStart" />
+                android:layout_marginTop="@dimen/dp_24" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -6,10 +6,13 @@
       <module name="simple-vocabulary.base" target="11" />
       <module name="simple-vocabulary.components" target="11" />
       <module name="simple-vocabulary.database" target="11" />
+      <module name="simple-vocabulary.flashcards" target="11" />
+      <module name="simple-vocabulary.preferences" target="11" />
       <module name="simple-vocabulary.repository" target="11" />
       <module name="simple-vocabulary.resources" target="11" />
       <module name="simple-vocabulary.ui-carddetail" target="11" />
       <module name="simple-vocabulary.ui-cards" target="11" />
+      <module name="simple-vocabulary.ui-flashcard" target="11" />
       <module name="simple-vocabulary.ui-flashcards" target="11" />
       <module name="simple-vocabulary.ui-setdetail" target="11" />
       <module name="simple-vocabulary.ui-sets" target="11" />

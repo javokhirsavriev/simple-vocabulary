@@ -13,6 +13,9 @@ interface CardsDao {
     )
     fun getCards(setId: Long, keyword: String): PagingSource<Int, CardEntity>
 
+    @Query("SELECT * FROM cards WHERE card_set_id = :setId")
+    fun getCards(setId: Long): List<CardEntity>
+
     @Query("SELECT * FROM cards WHERE card_id = :id")
     suspend fun getCardById(id: Long): CardEntity?
 
