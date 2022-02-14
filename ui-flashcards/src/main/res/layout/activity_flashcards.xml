@@ -1,8 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FlashcardsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutTop"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/buttonClose"
+            style="@style/ImageButton"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/ic_close"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textCount"
+            style="@style/Text16sp"
+            android:layout_width="@dimen/dp_0"
+            android:gravity="center"
+            android:paddingStart="@dimen/dp_16"
+            android:paddingEnd="@dimen/dp_16"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/buttonInfo"
+            app:layout_constraintStart_toEndOf="@+id/buttonClose"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/buttonInfo"
+            style="@style/ImageButton"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/ic_info"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            style="@style/DividerView"
+            android:layout_width="@dimen/dp_0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutStart"
+        style="@style/LayoutVertical"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
+        android:layout_margin="@dimen/dp_36"
+        android:background="@drawable/bg_ripple_layout"
+        android:gravity="center"
+        android:padding="@dimen/dp_20"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutTop">
+
+        <TextView
+            style="@style/Text20sp"
+            android:gravity="center_horizontal"
+            android:text="@string/welcome_to_flashcards" />
+
+        <TextView
+            style="@style/Text16sp"
+            android:layout_marginTop="@dimen/dp_8"
+            android:gravity="center_horizontal"
+            android:text="@string/flashcards_instruction" />
+
+        <uz.javokhirdev.svocabulary.presentation.components.IndicatorButton
+            android:id="@+id/buttonStart"
+            style="@style/UnelevatedButtonStyle"
+            android:layout_marginTop="@dimen/dp_32"
+            app:buttonText="@string/start" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutGame"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutTop">
+
+        <uz.javokhirdev.svocabulary.presentation.components.FlipView
+            android:id="@+id/flipView"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_0"
+            android:layout_margin="@dimen/dp_42"
+            android:clipToPadding="false"
+            app:flipDuration="500"
+            app:flipEnabled="true"
+            app:flipOnTouch="true"
+            app:flipType="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/viewDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textBack"
+                style="@style/Text16sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_ripple_layout"
+                android:gravity="center"
+                android:padding="@dimen/dp_20" />
+
+            <TextView
+                android:id="@+id/textFront"
+                style="@style/Text16sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_ripple_layout"
+                android:gravity="center"
+                android:padding="@dimen/dp_20" />
+        </uz.javokhirdev.svocabulary.presentation.components.FlipView>
+
+        <TextView
+            android:id="@+id/textCountIncorrect"
+            style="@style/Text14sp"
+            android:background="@drawable/bg_count_incorrect"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBottom_toTopOf="@+id/viewDivider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/flipView" />
+
+        <TextView
+            android:id="@+id/textCountCorrect"
+            style="@style/Text14sp"
+            android:background="@drawable/bg_count_correct"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBottom_toTopOf="@+id/viewDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/flipView" />
+
+        <View
+            android:id="@+id/viewDivider"
+            style="@style/DividerView"
+            android:layout_width="@dimen/dp_0"
+            app:layout_constraintBottom_toTopOf="@+id/layoutActions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/layoutActions"
+            style="@style/LayoutHorizontal"
+            android:layout_width="@dimen/dp_0"
+            android:background="@color/colorWhite"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:padding="@dimen/dp_20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/buttonCancel"
+                style="@style/NormalFabButton"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:contentDescription="@string/content_description"
+                android:src="@drawable/ic_close"
+                app:materialThemeOverlay="@style/ThemeFabRedWhite" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/buttonDone"
+                style="@style/NormalFabButton"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:contentDescription="@string/content_description"
+                android:src="@drawable/ic_done"
+                app:materialThemeOverlay="@style/ThemeFabGreenWhite" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/buttonVolume"
+                style="@style/NormalFabButton"
+                android:layout_marginStart="@dimen/dp_16"
+                android:contentDescription="@string/content_description"
+                android:src="@drawable/ic_volume_up"
+                app:materialThemeOverlay="@style/ThemeFabAppWhite" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutFinish"
+        style="@style/LayoutVertical"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
+        android:layout_margin="@dimen/dp_36"
+        android:background="@drawable/bg_ripple_layout"
+        android:gravity="center"
+        android:padding="@dimen/dp_20"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutTop">
+
+        <TextView
+            android:id="@+id/textFinishEmoji"
+            style="@style/Text20sp"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/sp_24" />
+
+        <TextView
+            android:id="@+id/textFinishTitle"
+            style="@style/Text20sp"
+            android:layout_marginTop="@dimen/dp_16"
+            android:gravity="center_horizontal"
+            android:text="@string/nice_work" />
+
+        <TextView
+            android:id="@+id/textFinishDescription"
+            style="@style/Text16sp"
+            android:layout_marginTop="@dimen/dp_8"
+            android:gravity="center_horizontal" />
+
+        <uz.javokhirdev.svocabulary.presentation.components.IndicatorButton
+            android:id="@+id/buttonContinue"
+            style="@style/UnelevatedButtonStyle"
+            android:layout_marginTop="@dimen/dp_32"
+            app:buttonText="@string/continue_str" />
+
+        <uz.javokhirdev.svocabulary.presentation.components.IndicatorButton
+            android:id="@+id/buttonReset"
+            style="@style/OutlinedButtonStyle"
+            android:layout_marginTop="@dimen/dp_20"
+            android:visibility="gone"
+            app:buttonText="@string/reset" />
+    </LinearLayout>
+
+    <uz.javokhirdev.svocabulary.presentation.components.LoadingView
+        android:id="@+id/loadingView"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutTop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

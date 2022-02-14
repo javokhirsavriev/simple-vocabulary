@@ -37,23 +37,17 @@
             <uz.javokhirdev.svocabulary.presentation.components.IndicatorButton
                 android:id="@+id/buttonSave"
                 style="@style/UnelevatedButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_24"
-                app:iconGravity="textStart" />
+                android:layout_marginTop="@dimen/dp_24" />
 
             <uz.javokhirdev.svocabulary.presentation.components.IndicatorButton
                 android:id="@+id/buttonDelete"
                 style="@style/UnelevatedButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
                 android:textColor="@color/color_red_button_text"
                 android:visibility="gone"
                 app:backgroundTint="@color/color_red_button_tint"
                 app:buttonText="@string/delete"
                 app:icon="@drawable/ic_delete"
-                app:iconGravity="textStart"
                 app:iconTint="@color/color_red_button_text" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

@@ -13,19 +13,18 @@ dependencies {
     implementation project(":data")
     implementation project(":repository")
 
+    /* JetBrains (Kotlin) libraries */
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
 
+    /* Android libraries */
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
-    implementation "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleExtVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
 
+    /* Google libraries */
     implementation "com.google.android.material:material:$materialVersion"
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
 
+    /* Other libraries */
     implementation "com.github.javokhirsavriev:common-extensions:$commonExtensionsVersion"
 }

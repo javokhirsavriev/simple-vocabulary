@@ -1,0 +1,14 @@
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+}
+
+apply from: "../configs.gradle"
+
+dependencies {
+    implementation project(":components")
+
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "androidx.activity:activity-ktx:$activityKtxVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+}
