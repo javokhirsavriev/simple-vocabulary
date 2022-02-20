@@ -68,6 +68,14 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
+    <style name="LayoutTop" parent="LayoutHorizontal">
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:paddingStart">@dimen/dp_20</item>
+        <item name="android:paddingTop">@dimen/dp_16</item>
+        <item name="android:paddingEnd">@dimen/dp_20</item>
+        <item name="android:paddingBottom">@dimen/dp_16</item>
+    </style>
+
     <!--Other styles-->
     <style name="ScrollView">
         <item name="android:layout_width">match_parent</item>
@@ -108,10 +116,12 @@
         <item name="colorSecondary">@color/colorAppTransparent30</item>
         <item name="colorSurface">@color/colorWhite</item>
         <item name="colorOnSurface">@color/colorBlack</item>
-        <item name="dialogCornerRadius">@dimen/dp_12</item>
+        <item name="dialogCornerRadius">@dimen/dp_8</item>
         <item name="alertDialogStyle">@style/DialogShape</item>
         <item name="materialAlertDialogTitleTextStyle">@style/DialogTitleText</item>
         <item name="materialAlertDialogBodyTextStyle">@style/DialogBodyText</item>
+        <item name="android:fontFamily">@font/bold</item>
+        <item name="fontFamily">@font/bold</item>
     </style>
 
     <style name="DialogShape" parent="MaterialAlertDialog.MaterialComponents">
@@ -119,14 +129,17 @@
     </style>
 
     <style name="DialogTitleText" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:fontFamily">@font/bold</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">@dimen/sp_18</item>
-        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/bold</item>
     </style>
 
     <style name="DialogBodyText" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:fontFamily">@font/regular</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">@dimen/sp_16</item>
+        <item name="fontFamily">@font/regular</item>
     </style>
 
 </resources>

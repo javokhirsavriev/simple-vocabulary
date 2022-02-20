@@ -8,10 +8,10 @@ interface CardsDao {
 
     @Query(
         "SELECT * FROM cards WHERE card_set_id = :setId " +
-                "AND (card_term LIKE :keyword OR card_definition LIKE :keyword)" +
+                "AND (card_term LIKE :keywords OR card_definition LIKE :keywords)" +
                 "ORDER BY created_at DESC"
     )
-    fun getCards(setId: Long, keyword: String): PagingSource<Int, CardEntity>
+    fun getCards(setId: Long, keywords: String): PagingSource<Int, CardEntity>
 
     @Query("SELECT * FROM cards WHERE card_set_id = :setId")
     fun getCards(setId: Long): List<CardEntity>

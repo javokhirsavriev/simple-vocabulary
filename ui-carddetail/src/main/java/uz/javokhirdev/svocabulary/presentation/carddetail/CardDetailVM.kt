@@ -27,9 +27,6 @@ class CardDetailVM @Inject constructor(
     private val createData = MutableStateFlow<UIState<Boolean>>(UIState.Idle)
     val create = createData.asStateFlow()
 
-    private val deleteData = MutableStateFlow<UIState<Boolean>>(UIState.Idle)
-    val delete = deleteData.asStateFlow()
-
     init {
         getCardById()
     }
@@ -53,12 +50,6 @@ class CardDetailVM @Inject constructor(
                 term = term,
                 definition = definition
             ).collectLatest { createData.value = it }
-        }
-    }
-
-    fun deleteCard() {
-        viewModelScope.launch {
-            repository.delete(args.cardId).collectLatest { deleteData.value = it }
         }
     }
 }

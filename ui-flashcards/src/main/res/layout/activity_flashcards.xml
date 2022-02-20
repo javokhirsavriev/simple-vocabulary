@@ -114,18 +114,22 @@
             <TextView
                 android:id="@+id/textBack"
                 style="@style/Text16sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/bg_ripple_layout"
+                android:background="@drawable/bg_flashcard_layout"
                 android:gravity="center"
                 android:padding="@dimen/dp_20" />
 
             <TextView
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
                 android:id="@+id/textFront"
                 style="@style/Text16sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/bg_ripple_layout"
+                android:background="@drawable/bg_flashcard_layout"
                 android:gravity="center"
                 android:padding="@dimen/dp_20" />
         </uz.javokhirdev.svocabulary.presentation.components.FlipView>
@@ -173,17 +177,8 @@
                 style="@style/NormalFabButton"
                 android:layout_marginEnd="@dimen/dp_16"
                 android:contentDescription="@string/content_description"
-                android:src="@drawable/ic_close"
+                android:src="@drawable/ic_thumb_down"
                 app:materialThemeOverlay="@style/ThemeFabRedWhite" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/buttonDone"
-                style="@style/NormalFabButton"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"
-                android:contentDescription="@string/content_description"
-                android:src="@drawable/ic_done"
-                app:materialThemeOverlay="@style/ThemeFabGreenWhite" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/buttonVolume"
@@ -192,6 +187,15 @@
                 android:contentDescription="@string/content_description"
                 android:src="@drawable/ic_volume_up"
                 app:materialThemeOverlay="@style/ThemeFabAppWhite" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/buttonDone"
+                style="@style/NormalFabButton"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:contentDescription="@string/content_description"
+                android:src="@drawable/ic_thumb_up"
+                app:materialThemeOverlay="@style/ThemeFabGreenWhite" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -205,7 +209,7 @@
         android:background="@drawable/bg_ripple_layout"
         android:gravity="center"
         android:padding="@dimen/dp_20"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -238,7 +242,7 @@
 
         <uz.javokhirdev.svocabulary.presentation.components.IndicatorButton
             android:id="@+id/buttonReset"
-            style="@style/OutlinedButtonStyle"
+            style="@style/UnelevatedButtonStyle"
             android:layout_marginTop="@dimen/dp_20"
             android:visibility="gone"
             app:buttonText="@string/reset" />

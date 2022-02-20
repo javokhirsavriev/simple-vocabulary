@@ -9,6 +9,7 @@ plugins {
 apply from: "../configs.gradle"
 
 dependencies {
+    implementation project(":base")
     implementation project(":components")
     implementation project(":data")
     implementation project(":repository")

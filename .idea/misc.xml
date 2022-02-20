@@ -37,17 +37,37 @@
         <entry key="components/src/main/res/drawable/bg_count_correct.xml" value="0.207" />
         <entry key="components/src/main/res/drawable/bg_count_incorrect.xml" value="0.207" />
         <entry key="components/src/main/res/drawable/bg_custom_menu.xml" value="0.1975" />
+        <entry key="components/src/main/res/drawable/bg_flashcard_layout.xml" value="0.115" />
         <entry key="components/src/main/res/drawable/bg_input.xml" value="0.1975" />
         <entry key="components/src/main/res/drawable/bg_oval.xml" value="0.1975" />
         <entry key="components/src/main/res/drawable/bg_ripple.xml" value="0.1975" />
         <entry key="components/src/main/res/drawable/bg_ripple_layout.xml" value="0.1975" />
+        <entry key="components/src/main/res/drawable/ic_add.xml" value="0.207" />
+        <entry key="components/src/main/res/drawable/ic_arrow_back.xml" value="0.207" />
+        <entry key="components/src/main/res/drawable/ic_clear_all.xml" value="0.115" />
         <entry key="components/src/main/res/drawable/ic_close.xml" value="0.1975" />
+        <entry key="components/src/main/res/drawable/ic_copy.xml" value="0.207" />
+        <entry key="components/src/main/res/drawable/ic_delete.xml" value="0.207" />
         <entry key="components/src/main/res/drawable/ic_done.xml" value="0.1975" />
+        <entry key="components/src/main/res/drawable/ic_edit.xml" value="0.207" />
+        <entry key="components/src/main/res/drawable/ic_fitness.xml" value="0.207" />
         <entry key="components/src/main/res/drawable/ic_info.xml" value="0.1975" />
+        <entry key="components/src/main/res/drawable/ic_launcher_background.xml" value="0.207" />
+        <entry key="components/src/main/res/drawable/ic_more.xml" value="0.207" />
         <entry key="components/src/main/res/drawable/ic_rotation.xml" value="0.1975" />
+        <entry key="components/src/main/res/drawable/ic_save.xml" value="0.207" />
+        <entry key="components/src/main/res/drawable/ic_search.xml" value="0.207" />
+        <entry key="components/src/main/res/drawable/ic_thumb_down.xml" value="0.115" />
+        <entry key="components/src/main/res/drawable/ic_thumb_up.xml" value="0.115" />
+        <entry key="components/src/main/res/drawable/ic_volume_up.xml" value="0.207" />
         <entry key="components/src/main/res/layout/fragment_card_detail.xml" value="0.37552083333333336" />
         <entry key="components/src/main/res/layout/fragment_card_list.xml" value="0.10185185185185185" />
         <entry key="components/src/main/res/layout/fragment_set_detail.xml" value="0.37552083333333336" />
+        <entry key="components/src/main/res/layout/fragment_set_list.xml" value="0.37552083333333336" />
+        <entry key="components/src/main/res/layout/fragment_sets.xml" value="0.37552083333333336" />
+        <entry key="components/src/main/res/layout/layout_action_sheet.xml" value="0.37552083333333336" />
+        <entry key="components/src/main/res/menu/menu_cards.xml" value="0.37552083333333336" />
+        <entry key="components/src/main/res/menu/menu_sets.xml" value="0.37552083333333336" />
         <entry key="resources/src/main/res/drawable/bg_custom_menu.xml" value="0.1975" />
         <entry key="resources/src/main/res/layout/fragment_card_detail.xml" value="0.37552083333333336" />
         <entry key="resources/src/main/res/layout/fragment_card_list.xml" value="0.37552083333333336" />
@@ -68,6 +88,7 @@
         <entry key="ui-sets/src/main/res/layout/fragment_set_detail.xml" value="0.3609375" />
         <entry key="ui-sets/src/main/res/layout/fragment_set_list.xml" value="0.3609375" />
         <entry key="ui-sets/src/main/res/layout/item_set.xml" value="0.3609375" />
+        <entry key="ui-sets/src/main/res/layout/layout_sheet_set.xml" value="0.37552083333333336" />
       </map>
     </option>
   </component>

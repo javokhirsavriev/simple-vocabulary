@@ -10,5 +10,6 @@ dependencies {
 
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "com.google.android.material:material:$materialVersion"
+
     implementation "com.github.javokhirsavriev:common-extensions:$commonExtensionsVersion"
 }

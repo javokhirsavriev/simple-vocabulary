@@ -11,4 +11,6 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "androidx.activity:activity-ktx:$activityKtxVersion"
     implementation "com.google.android.material:material:$materialVersion"
+
+    implementation "com.github.javokhirsavriev:common-extensions:$commonExtensionsVersion"
 }

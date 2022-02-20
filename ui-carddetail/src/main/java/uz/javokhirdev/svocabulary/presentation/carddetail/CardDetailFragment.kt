@@ -33,17 +33,18 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
         with(binding) {
             toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
 
+            inputTerm.setText(term)
             inputTerm.onTextChangeListener { term = this }
+
+            inputDefinition.setText(definition)
             inputDefinition.onTextChangeListener { definition = this }
 
             buttonSave.onClick { createCard() }
-            buttonDelete.onClick { viewModel.deleteCard() }
         }
 
         with(viewModel) {
             repeatingJobOnStarted { card.collectLatest { onCardState(it) } }
             repeatingJobOnStarted { create.collectLatest { onCreateState(it) } }
-            repeatingJobOnStarted { delete.collectLatest { onDeleteState(it) } }
         }
     }
 
@@ -51,7 +52,6 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
         with(binding) {
             uiState onLoading {
                 buttonSave.onLoading(isLoading)
-                buttonDelete.onLoading(isLoading)
             } onSuccess {
                 setCardData(data)
             }
@@ -62,20 +62,6 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
         with(binding) {
             uiState onLoading {
                 buttonSave.onLoading(isLoading)
-                buttonDelete.onLoading(isLoading)
-            } onSuccess {
-                findNavController().navigateUp()
-            } onFailure {
-                toast(message)
-            }
-        }
-    }
-
-    private fun onDeleteState(uiState: UIState<Boolean>) {
-        with(binding) {
-            uiState onLoading {
-                buttonSave.onLoading(isLoading)
-                buttonDelete.onLoading(isLoading)
             } onSuccess {
                 findNavController().navigateUp()
             } onFailure {
@@ -85,9 +71,12 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
     }
 
     private fun setCardData(obj: CardModel? = null) {
-        term = obj?.term.orEmpty()
-        definition = obj?.definition.orEmpty()
         isNewCreate = obj?.id.isNull()
+
+        if (!isNewCreate) {
+            term = obj?.term.orEmpty()
+            definition = obj?.definition.orEmpty()
+        }
 
         val toolbarTitle = if (isNewCreate) R.string.create_card else R.string.edit_card
         val buttonText = if (isNewCreate) R.string.save else R.string.edit
@@ -96,13 +85,13 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
         with(binding) {
             toolbar.setTitle(toolbarTitle)
 
-            inputTerm.setText(term)
-            inputDefinition.setText(definition)
+            if (!isNewCreate) {
+                inputTerm.setText(term)
+                inputDefinition.setText(definition)
+            }
 
             buttonSave.setButtonText(getString(buttonText))
             buttonSave.setIconResource(buttonIcon)
-
-            buttonDelete.beVisibleIf(!isNewCreate)
         }
     }
 

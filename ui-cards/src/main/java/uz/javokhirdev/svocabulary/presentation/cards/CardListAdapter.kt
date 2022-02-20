@@ -30,8 +30,12 @@ class CardListAdapter(
 
         init {
             with(binding) {
-                root.onClick { getItem(layoutPosition)?.let { listener.onCardClick(it) } }
                 buttonVolume.onClick { getItem(layoutPosition)?.let { listener.onVolumeClick(it) } }
+                root.onClick { getItem(layoutPosition)?.let { listener.onCardClick(it) } }
+                root.setOnLongClickListener {
+                    getItem(layoutPosition)?.let { listener.onCardLongClick(it) }
+                    true
+                }
             }
         }
 
@@ -57,6 +61,8 @@ class CardListAdapter(
 
     interface CardListener {
         fun onCardClick(item: CardModel)
+
+        fun onCardLongClick(item: CardModel)
 
         fun onVolumeClick(item: CardModel)
     }
