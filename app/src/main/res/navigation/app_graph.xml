@@ -4,6 +4,6 @@
     android:id="@+id/home"
     app:startDestination="@id/setList">
 
-    <include app:graph="@navigation/set_list_graph" />
+    <include app:graph="@navigation/sets_graph" />
 
 </navigation>

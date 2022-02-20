@@ -22,9 +22,9 @@ class SetDetailFragment : Fragment(R.layout.fragment_set_detail) {
 
     private val viewModel by viewModels<SetDetailVM>()
 
+    private var isNewCreate = true
     private var title = ""
     private var description = ""
-    private var isNewCreate = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,7 +32,10 @@ class SetDetailFragment : Fragment(R.layout.fragment_set_detail) {
         with(binding) {
             toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
 
+            inputTitle.setText(title)
             inputTitle.onTextChangeListener { title = this }
+
+            inputDescription.setText(description)
             inputDescription.onTextChangeListener { description = this }
 
             buttonSave.onClick { createSet() }
@@ -65,9 +68,7 @@ class SetDetailFragment : Fragment(R.layout.fragment_set_detail) {
     }
 
     private fun setSetData(obj: SetModel? = null) {
-        title = obj?.title.orEmpty()
-        description = obj?.description.orEmpty()
-        isNewCreate = obj?.id.isNull()
+        isNewCreate = obj.isNull()
 
         val toolbarTitle = if (isNewCreate) R.string.create_set else R.string.edit_set
         val buttonText = if (isNewCreate) R.string.save else R.string.edit
@@ -76,11 +77,18 @@ class SetDetailFragment : Fragment(R.layout.fragment_set_detail) {
         with(binding) {
             toolbar.setTitle(toolbarTitle)
 
-            inputTitle.setText(title)
-            inputDescription.setText(description)
-
             buttonSave.setButtonText(getString(buttonText))
             buttonSave.setIconResource(buttonIcon)
+        }
+
+        if (!isNewCreate) {
+            title = obj?.title.orEmpty()
+            description = obj?.description.orEmpty()
+
+            with(binding) {
+                inputTitle.setText(title)
+                inputDescription.setText(description)
+            }
         }
     }
 

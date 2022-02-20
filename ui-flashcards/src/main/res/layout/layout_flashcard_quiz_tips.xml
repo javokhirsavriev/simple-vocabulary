@@ -59,8 +59,8 @@
             android:background="@drawable/bg_oval"
             android:backgroundTint="@color/colorGreen"
             android:contentDescription="@string/content_description"
-            android:padding="@dimen/dp_4"
-            android:src="@drawable/ic_done" />
+            android:padding="@dimen/dp_8"
+            android:src="@drawable/ic_thumb_up" />
 
         <LinearLayout
             style="@style/LayoutVertical"
@@ -90,8 +90,8 @@
             android:background="@drawable/bg_oval"
             android:backgroundTint="@color/colorRed"
             android:contentDescription="@string/content_description"
-            android:padding="@dimen/dp_4"
-            android:src="@drawable/ic_close" />
+            android:padding="@dimen/dp_8"
+            android:src="@drawable/ic_thumb_down" />
 
         <LinearLayout
             style="@style/LayoutVertical"

@@ -3,7 +3,8 @@
     style="@style/LayoutVertical"
     android:layout_margin="@dimen/dp_8"
     android:background="@drawable/bg_ripple_layout"
-    android:padding="@dimen/dp_16">
+    android:padding="@dimen/dp_16"
+    android:stateListAnimator="@animator/animation_selector">
 
     <TextView
         android:id="@+id/textTitle"

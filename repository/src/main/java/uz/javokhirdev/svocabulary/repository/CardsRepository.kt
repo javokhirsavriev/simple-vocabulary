@@ -18,7 +18,7 @@ class CardsRepository @Inject constructor(
     private val dispatcher: DispatcherProvider
 ) {
 
-    fun getCards(setId: Long, keyword: String): Flow<PagingData<CardModel>> {
+    fun getCards(setId: Long, keywords: String): Flow<PagingData<CardModel>> {
         return Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,
@@ -28,7 +28,7 @@ class CardsRepository @Inject constructor(
             pagingSourceFactory = {
                 cardsDao.getCards(
                     setId = setId,
-                    keyword = "%$keyword%"
+                    keywords = "%$keywords%"
                 )
             }
         ).flow.map {
@@ -120,6 +120,18 @@ class CardsRepository @Inject constructor(
         emit(UIState.loading(true))
 
         cardsDao.delete(cardId)
+
+        emit(UIState.loading(false))
+        emit(UIState.success(true))
+    }.catch {
+        emit(UIState.loading(false))
+        emit(UIState.success(false))
+    }.flowOn(dispatcher.getIO())
+
+    suspend fun deleteCardsBySetId(setId: Long) = flow {
+        emit(UIState.loading(true))
+
+        cardsDao.deleteCardsBySetId(setId)
 
         emit(UIState.loading(false))
         emit(UIState.success(true))

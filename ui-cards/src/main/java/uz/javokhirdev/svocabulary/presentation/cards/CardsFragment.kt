@@ -6,37 +6,44 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import uz.javokhirdev.extensions.*
+import uz.javokhirdev.svocabulary.base.*
 import uz.javokhirdev.svocabulary.data.NOT_ID
 import uz.javokhirdev.svocabulary.data.SET_ID
 import uz.javokhirdev.svocabulary.data.UIState
 import uz.javokhirdev.svocabulary.data.model.CardModel
-import uz.javokhirdev.svocabulary.data.model.SetModel
 import uz.javokhirdev.svocabulary.data.onSuccess
 import uz.javokhirdev.svocabulary.presentation.components.R
-import uz.javokhirdev.svocabulary.presentation.components.databinding.FragmentCardListBinding
+import uz.javokhirdev.svocabulary.presentation.components.databinding.FragmentCardsBinding
 import uz.javokhirdev.svocabulary.presentation.flashcards.FlashcardsActivity
 import uz.javokhirdev.svocabulary.utils.TTSManager
+import uz.javokhirdev.svocabulary.utils.copy
 import uz.javokhirdev.svocabulary.utils.showDialog
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CardListFragment : Fragment(R.layout.fragment_card_list), CardListAdapter.CardListener {
+class CardsFragment : Fragment(R.layout.fragment_cards), CardListAdapter.CardListener,
+    ActionSheet.ActionSheetListener {
 
-    private val binding by viewBinding(FragmentCardListBinding::bind)
+    private val binding by viewBinding(FragmentCardsBinding::bind)
 
     private val viewModel by viewModels<CardListVM>()
+
+    private val args by navArgs<CardsFragmentArgs>()
 
     @Inject
     lateinit var ttsManager: TTSManager
 
     private var cardListAdapter: CardListAdapter? = null
 
-    private var setId = NOT_ID
+    private var selectedCard: CardModel? = null
+
+    private var keywords = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,6 +52,7 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), CardListAdapter.
         cardListAdapter?.addLoadStateListener { onCardsState(it) }
 
         with(binding) {
+            toolbar.title = args.setTitle
             toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
             toolbar.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
@@ -52,12 +60,8 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), CardListAdapter.
                         navigateToCardDetail()
                         true
                     }
-                    R.id.editSet -> {
-                        navigateToSetDetail()
-                        true
-                    }
-                    R.id.deleteSet -> {
-                        deleteSet()
+                    R.id.clearAll -> {
+                        clearAll()
                         true
                     }
                     else -> false
@@ -66,16 +70,15 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), CardListAdapter.
 
             rvCards.vertical().adapter = cardListAdapter
 
+            inputSearch.setText(keywords)
             inputSearch.onTextChangeListener { getCards(this) }
 
             buttonFlashcard.onClick { navigateToFlashcards() }
         }
 
         with(viewModel) {
-            getSetById()
-
-            repeatingJobOnStarted { set.collectLatest { onSetState(it) } }
             repeatingJobOnStarted { delete.collectLatest { onDeleteState(it) } }
+            repeatingJobOnStarted { clearAll.collectLatest { onDeleteState(it) } }
         }
 
         getCards()
@@ -86,19 +89,25 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), CardListAdapter.
         super.onDestroyView()
     }
 
-    override fun onCardClick(item: CardModel) {
-        navigateToCardDetail(item.id)
-    }
+    override fun onCardClick(item: CardModel) = navigateToCardDetail(item.id)
+
+    override fun onCardLongClick(item: CardModel) = showActionSheet(item)
 
     override fun onVolumeClick(item: CardModel) {
         item.term?.let { ttsManager.say(it) }
     }
 
-    private fun onSetState(uiState: UIState<SetModel>) {
-        uiState onSuccess {
-            setId = data?.id ?: NOT_ID
-
-            binding.toolbar.title = data?.title ?: getString(R.string.cards)
+    override fun onSetSheetAction(sheetState: SheetState) {
+        selectedCard?.let { card ->
+            sheetState onCopy {
+                copy("${card.term.orEmpty()}\n${card.definition.orEmpty()}")
+            } onListen {
+                card.term?.let { ttsManager.say(it) }
+            } onEdit {
+                card.id?.let { navigateToCardDetail(it) }
+            } onDelete {
+                card.id?.let { viewModel.deleteCard(it) }
+            }
         }
     }
 
@@ -135,45 +144,49 @@ class CardListFragment : Fragment(R.layout.fragment_card_list), CardListAdapter.
     }
 
     private fun onDeleteState(uiState: UIState<Boolean>) {
+        binding.buttonFlashcard.hide()
+
         uiState onSuccess {
-            data.orFalse().ifTrue { findNavController().navigateUp() }
+            data.orFalse().ifTrue { getCards(keywords) }
         }
     }
 
-    private fun getCards(keyword: String = "") {
-        with(viewModel) {
-            repeatingJobOnStarted {
-                getCards(keyword).collectLatest { cardListAdapter?.submitData(it) }
-            }
+    private fun getCards(text: String = "") {
+        keywords = text
+
+        repeatingJobOnStarted {
+            viewModel.getCards(keywords).collectLatest { cardListAdapter?.submitData(it) }
         }
     }
 
-    private fun deleteSet() {
+    private fun clearAll() {
         requireContext().showDialog(
-            title = getString(R.string.delete_set),
-            message = getString(R.string.delete_set_description),
+            title = getString(R.string.clear_all),
+            message = getString(R.string.clear_all_description),
             positiveText = getString(R.string.cancel),
             negativeText = getString(R.string.delete),
-            cancelAction = { viewModel.deleteSet() }
+            cancelAction = { viewModel.clearAll() }
         )
     }
 
     private fun navigateToCardDetail(cardId: Long? = NOT_ID) {
-        val direction = CardListFragmentDirections.cardListToDetail(
+        val direction = CardsFragmentDirections.cardsToDetail(
             cardId = cardId ?: NOT_ID,
-            setId = setId
+            setId = args.setId
         )
-        findNavController().navigate(direction)
-    }
-
-    private fun navigateToSetDetail() {
-        val direction = CardListFragmentDirections.cardListToSetDetail(setId = setId)
         findNavController().navigate(direction)
     }
 
     private fun navigateToFlashcards() {
         val intent = Intent(requireActivity(), FlashcardsActivity::class.java)
-        intent.putExtra(SET_ID, setId)
+        intent.putExtra(SET_ID, args.setId)
         startActivity(intent)
+    }
+
+    private fun showActionSheet(item: CardModel) {
+        selectedCard = item
+
+        val dialog = ActionSheet.newInstance(this, true)
+        childFragmentManager.run { dialog.show(this, dialog.tag) }
     }
 }

@@ -13,7 +13,7 @@
         android:layout_width="@dimen/dp_0"
         android:paddingStart="@dimen/dp_16"
         android:paddingTop="@dimen/dp_12"
-        android:paddingEnd="@dimen/dp_12"
+        android:paddingEnd="@dimen/dp_16"
         android:paddingBottom="@dimen/dp_12"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonVolume"
@@ -32,18 +32,17 @@
             android:textColor="@color/colorGray500" />
     </LinearLayout>
 
-    <ImageButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonVolume"
-        style="@style/ImageButton"
-        android:layout_width="@dimen/dp_42"
-        android:layout_height="@dimen/dp_42"
-        android:layout_marginEnd="@dimen/dp_12"
+        style="@style/NormalFabButton"
+        android:layout_margin="@dimen/dp_12"
         android:contentDescription="@string/content_description"
         android:src="@drawable/ic_volume_up"
+        app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/colorApp" />
+        app:materialThemeOverlay="@style/ThemeFabAppWhite" />
 
     <View
         style="@style/DividerView"

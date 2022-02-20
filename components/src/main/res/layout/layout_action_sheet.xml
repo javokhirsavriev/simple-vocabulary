@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/LayoutVertical"
+    android:paddingTop="@dimen/dp_12"
+    android:paddingBottom="@dimen/dp_12">
+
+    <TextView
+        android:id="@+id/textCopy"
+        style="@style/Text16sp"
+        android:layout_width="match_parent"
+        android:drawablePadding="@dimen/dp_16"
+        android:fontFamily="@font/medium"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_16"
+        android:stateListAnimator="@animator/animation_selector"
+        android:text="@string/copy"
+        app:drawableStartCompat="@drawable/ic_copy" />
+
+    <TextView
+        android:id="@+id/textListen"
+        style="@style/Text16sp"
+        android:layout_width="match_parent"
+        android:drawablePadding="@dimen/dp_16"
+        android:fontFamily="@font/medium"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_16"
+        android:stateListAnimator="@animator/animation_selector"
+        android:text="@string/listen"
+        android:visibility="gone"
+        app:drawableStartCompat="@drawable/ic_volume_up" />
+
+    <TextView
+        android:id="@+id/textEdit"
+        style="@style/Text16sp"
+        android:layout_width="match_parent"
+        android:drawablePadding="@dimen/dp_16"
+        android:fontFamily="@font/medium"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_16"
+        android:stateListAnimator="@animator/animation_selector"
+        android:text="@string/edit"
+        app:drawableStartCompat="@drawable/ic_edit" />
+
+    <TextView
+        android:id="@+id/textDelete"
+        style="@style/Text16sp"
+        android:layout_width="match_parent"
+        android:drawablePadding="@dimen/dp_16"
+        android:fontFamily="@font/medium"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_16"
+        android:stateListAnimator="@animator/animation_selector"
+        android:text="@string/delete"
+        android:textColor="@color/colorRed"
+        app:drawableStartCompat="@drawable/ic_delete" />
+</LinearLayout>

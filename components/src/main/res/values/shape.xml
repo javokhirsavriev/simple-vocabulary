@@ -3,15 +3,15 @@
 
     <style name="ShapeTopRounded" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopLeft">@dimen/dp_12</item>
-        <item name="cornerSizeTopRight">@dimen/dp_12</item>
+        <item name="cornerSizeTopLeft">@dimen/dp_8</item>
+        <item name="cornerSizeTopRight">@dimen/dp_8</item>
         <item name="cornerSizeBottomRight">@dimen/dp_0</item>
         <item name="cornerSizeBottomLeft">@dimen/dp_0</item>
     </style>
 
     <style name="ShapeRounded" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/dp_12</item>
+        <item name="cornerSize">@dimen/dp_8</item>
     </style>
 
     <style name="ShapeOval">

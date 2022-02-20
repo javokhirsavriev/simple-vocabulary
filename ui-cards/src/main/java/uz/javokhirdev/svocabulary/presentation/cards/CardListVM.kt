@@ -13,38 +13,37 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import uz.javokhirdev.svocabulary.data.UIState
 import uz.javokhirdev.svocabulary.data.model.CardModel
-import uz.javokhirdev.svocabulary.data.model.SetModel
 import uz.javokhirdev.svocabulary.repository.CardsRepository
-import uz.javokhirdev.svocabulary.repository.SetsRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class CardListVM @Inject constructor(
-    private val cardsRepository: CardsRepository,
-    private val setsRepository: SetsRepository,
+    private val repository: CardsRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val args = CardListFragmentArgs.fromSavedStateHandle(savedStateHandle)
-
-    private val setData = MutableStateFlow<UIState<SetModel>>(UIState.Idle)
-    val set = setData.asStateFlow()
+    private val args = CardsFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
     private val deleteData = MutableStateFlow<UIState<Boolean>>(UIState.Idle)
     val delete = deleteData.asStateFlow()
 
-    fun getSetById() {
+    private val clearAllData = MutableStateFlow<UIState<Boolean>>(UIState.Idle)
+    val clearAll = clearAllData.asStateFlow()
+
+    fun getCards(keywords: String): Flow<PagingData<CardModel>> = repository.getCards(
+        setId = args.setId,
+        keywords = keywords
+    ).cachedIn(viewModelScope)
+
+    fun deleteCard(cardId: Long) {
         viewModelScope.launch {
-            setsRepository.getSetById(args.setId).collectLatest { setData.value = it }
+            repository.delete(cardId).collectLatest { deleteData.value = it }
         }
     }
 
-    fun getCards(keyword: String): Flow<PagingData<CardModel>> =
-        cardsRepository.getCards(args.setId, keyword).cachedIn(viewModelScope)
-
-    fun deleteSet() {
+    fun clearAll() {
         viewModelScope.launch {
-            setsRepository.delete(args.setId).collectLatest { deleteData.value = it }
+            repository.deleteCardsBySetId(args.setId).collectLatest { clearAllData.value = it }
         }
     }
 }

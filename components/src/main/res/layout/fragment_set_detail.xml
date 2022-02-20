@@ -3,14 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/LayoutVertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/topAppBar"
-        style="@style/AppBarStyle">
+    <com.google.android.material.appbar.AppBarLayout style="@style/AppBarStyle">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/ToolbarStyle"
-            app:navigationIcon="@drawable/ic_arrow_back" />
+            app:navigationIcon="@drawable/ic_close" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <View style="@style/DividerView" />
@@ -19,11 +17,21 @@
 
         <LinearLayout
             style="@style/LayoutVertical"
+            android:gravity="center_horizontal"
             android:padding="@dimen/dp_20">
+
+            <TextView
+                style="@style/Text16sp"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:gravity="center_horizontal"
+                android:text="@string/set_description"
+                android:textColor="@color/colorGray500" />
 
             <EditText
                 android:id="@+id/inputTitle"
                 style="@style/InputView"
+                android:layout_marginTop="@dimen/dp_24"
                 android:hint="@string/enter_title"
                 android:importantForAutofill="no"
                 android:maxLength="40" />

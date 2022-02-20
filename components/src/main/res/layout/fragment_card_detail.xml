@@ -3,14 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/LayoutVertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/topAppBar"
-        style="@style/AppBarStyle">
+    <com.google.android.material.appbar.AppBarLayout style="@style/AppBarStyle">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/ToolbarStyle"
-            app:navigationIcon="@drawable/ic_arrow_back" />
+            app:navigationIcon="@drawable/ic_close" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <View style="@style/DividerView" />
@@ -19,6 +17,7 @@
 
         <LinearLayout
             style="@style/LayoutVertical"
+            android:gravity="center_horizontal"
             android:padding="@dimen/dp_20">
 
             <EditText
@@ -38,17 +37,6 @@
                 android:id="@+id/buttonSave"
                 style="@style/UnelevatedButtonStyle"
                 android:layout_marginTop="@dimen/dp_24" />
-
-            <uz.javokhirdev.svocabulary.presentation.components.IndicatorButton
-                android:id="@+id/buttonDelete"
-                style="@style/UnelevatedButtonStyle"
-                android:layout_marginTop="@dimen/dp_20"
-                android:textColor="@color/color_red_button_text"
-                android:visibility="gone"
-                app:backgroundTint="@color/color_red_button_tint"
-                app:buttonText="@string/delete"
-                app:icon="@drawable/ic_delete"
-                app:iconTint="@color/color_red_button_text" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

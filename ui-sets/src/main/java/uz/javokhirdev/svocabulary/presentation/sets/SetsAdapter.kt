@@ -11,10 +11,10 @@ import uz.javokhirdev.extensions.onClick
 import uz.javokhirdev.svocabulary.data.model.SetModel
 import uz.javokhirdev.svocabulary.presentation.sets.databinding.ItemSetBinding
 
-class SetListAdapter(
+class SetsAdapter(
     context: Context,
     private val listener: SetListener
-) : PagingDataAdapter<SetModel, SetListAdapter.ViewHolder>(DiffCallback()) {
+) : PagingDataAdapter<SetModel, SetsAdapter.ViewHolder>(DiffCallback()) {
 
     private val inflater = context.inflater
 
@@ -32,6 +32,10 @@ class SetListAdapter(
         init {
             with(binding) {
                 root.onClick { getItem(layoutPosition)?.let { listener.onSetClick(it) } }
+                root.setOnLongClickListener {
+                    getItem(layoutPosition)?.let { listener.onSetLongClick(it) }
+                    true
+                }
             }
         }
 
@@ -59,5 +63,7 @@ class SetListAdapter(
 
     interface SetListener {
         fun onSetClick(item: SetModel)
+
+        fun onSetLongClick(item: SetModel)
     }
 }

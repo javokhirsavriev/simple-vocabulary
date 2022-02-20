@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import uz.javokhirdev.extensions.color
 import uz.javokhirdev.extensions.dpToPx
+import uz.javokhirdev.extensions.fontFamily
 import uz.javokhirdev.extensions.textColor
 import uz.javokhirdev.svocabulary.data.MATCH_PARENT
 
@@ -51,6 +52,7 @@ class LoadingView : RelativeLayout {
 
         val textView = TextView(context).apply {
             layoutParams = params
+            fontFamily(R.font.bold)
             gravity = Gravity.CENTER
             isAllCaps = false
             includeFontPadding = false
