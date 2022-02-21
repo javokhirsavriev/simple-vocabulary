@@ -1,16 +1,24 @@
 package uz.javokhirdev.svocabulary.presentation.flashcards
 
+import android.animation.AnimatorSet
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
+import android.view.animation.OvershootInterpolator
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.children
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import uz.javokhirdev.extensions.*
 import uz.javokhirdev.svocabulary.data.NOT_ID
 import uz.javokhirdev.svocabulary.data.SET_ID
@@ -18,6 +26,7 @@ import uz.javokhirdev.svocabulary.data.UIState
 import uz.javokhirdev.svocabulary.data.model.CardModel
 import uz.javokhirdev.svocabulary.data.onSuccess
 import uz.javokhirdev.svocabulary.presentation.components.R
+import uz.javokhirdev.svocabulary.presentation.flashcards.data.Presets
 import uz.javokhirdev.svocabulary.presentation.flashcards.data.TipsSheet
 import uz.javokhirdev.svocabulary.presentation.flashcards.databinding.FragmentFlashcardsBinding
 import uz.javokhirdev.svocabulary.swipecards.SwipeFlingAdapterView
@@ -25,7 +34,7 @@ import uz.javokhirdev.svocabulary.utils.colorFilter
 import kotlin.math.abs
 
 @AndroidEntryPoint
-class FlashcardsActivity : AppCompatActivity() {
+class FlashcardsActivity : AppCompatActivity(), View.OnLayoutChangeListener {
 
     private val binding by lazy { FragmentFlashcardsBinding.inflate(layoutInflater) }
 
@@ -42,7 +51,7 @@ class FlashcardsActivity : AppCompatActivity() {
     private var currentRound = 1
     private var forgotCount = 0
     private var rememberCount = 0
-    private val sideTextWidth = 0
+    private var sideTextWidth = 0
     private var setId = NOT_ID
 
     private var isCardAnimated = false
@@ -62,14 +71,48 @@ class FlashcardsActivity : AppCompatActivity() {
         }
     }
 
+    override fun onLayoutChange(
+        view: View,
+        left: Int,
+        top: Int,
+        right: Int,
+        bottom: Int,
+        oldLeft: Int,
+        oldTop: Int,
+        oldRight: Int,
+        oldBottom: Int
+    ) {
+        view.removeOnLayoutChangeListener(this)
+        sideTextWidth = view.width
+    }
+
     private fun configureClickListeners() {
         with(binding) {
             "Round $currentRound".also { textRound.text = it }
+
+            textSideTwo.layoutParams.width = 0
+            textSideTwoNumber.alpha = 0.5f
+
+            "Side ".also {
+                textSideOne.text = it
+                textSideTwo.text = it
+            }
+
+            textSideOne.isLaidOut.ifFalse {
+                textSideOne.addOnLayoutChangeListener(this@FlashcardsActivity)
+            }
+
+            textSideOne.isLayoutRequested.ifTrue {
+                textSideOne.addOnLayoutChangeListener(this@FlashcardsActivity)
+            }
+
+            sideTextWidth = textSideOne.width
 
             buttonClose.onClick { finish() }
             buttonInfo.onClick { showTipsSheet() }
             buttonForgot.onClick { tapForgot() }
             buttonRemember.onClick { tapRemember() }
+            sideContainer.onClick { switchLangPair() }
         }
     }
 
@@ -152,7 +195,7 @@ class FlashcardsActivity : AppCompatActivity() {
 
                             return
                         } else {
-                            finish()
+                            finishedGame()
                         }
                     }
 
@@ -314,6 +357,85 @@ class FlashcardsActivity : AppCompatActivity() {
     private fun tapRemember() {
         if (!isCardAnimated) {
             binding.swipeView.topCardListener?.selectRight()
+        }
+    }
+
+    private fun switchLangPair() {
+        with(binding) {
+            swipeView.selectedView?.isEnabled.orFalse().ifTrue {
+                flashcardsAdapter?.let { adapter ->
+                    adapter.isInverted().ifTrue {
+                        textSideOneNumber
+                            .animate()
+                            .alpha(1f)
+                            .duration = 200
+
+                        textSideTwoNumber
+                            .animate()
+                            .alpha(0.5f)
+                            .duration = 200
+
+                        animateWidth(textSideOne)
+
+                        textSideTwo.layoutParams.width = 0
+                    }.ifFalse {
+                        textSideOneNumber
+                            .animate()
+                            .alpha(0.5f)
+                            .duration = 200
+
+                        textSideTwoNumber
+                            .animate()
+                            .alpha(1f)
+                            .duration = 200
+
+                        textSideOne.layoutParams.width = 0
+
+                        animateWidth(textSideTwo)
+                    }
+
+                    val isInverted = !adapter.isInverted()
+                    adapter.setInverted(isInverted)
+                    adapter.notifyDataSetChanged()
+
+                    swipeView.children.forEach { view ->
+                        val viewHolder = FlashcardsAdapter.ViewHolder(view)
+                        viewHolder.textFront.beInvisibleIf(isInverted)
+                        viewHolder.textBack.beInvisibleIf(!isInverted)
+                    }
+
+                    swipeView.selectedView?.let {
+                        val viewHolder = FlashcardsAdapter.ViewHolder(it)
+                        viewHolder.textFront.beInvisibleIf(!isInverted)
+                        viewHolder.textBack.beInvisibleIf(isInverted)
+                        rotateCard(viewHolder)
+                    }
+                }
+            }
+        }
+        return
+    }
+
+    private fun animateWidth(view: View) {
+        val duration = ValueAnimator
+            .ofInt(view.width, sideTextWidth)
+            .setDuration(200L)
+        duration.addUpdateListener {
+            view.layoutParams.width = (it.animatedValue as Int).toInt()
+            view.requestLayout()
+        }
+
+        val animatorSet = AnimatorSet()
+        animatorSet.interpolator = OvershootInterpolator()
+        animatorSet.play(duration)
+        animatorSet.start()
+    }
+
+    private fun finishedGame() {
+        lifecycleScope.launch {
+            binding.konfettiView.start(Presets.rain())
+            delay(3000L)
+            finish()
         }
     }
 
