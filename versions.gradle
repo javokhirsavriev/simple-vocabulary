@@ -24,10 +24,11 @@ ext {
     roomVersion = "2.4.1"
 
     /* Google libraries */
-    hiltVersion = "2.40.5"
+    hiltVersion = '2.41'
     materialVersion = "1.5.0"
     gsonVersion = "2.8.9"
 
     /* Other libraries */
+    konfettiVersion = "2.0.2"
     commonExtensionsVersion = "1.0.6"
 }

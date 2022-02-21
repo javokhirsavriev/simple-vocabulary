@@ -17,7 +17,7 @@ import uz.javokhirdev.svocabulary.repository.CardsRepository
 import javax.inject.Inject
 
 @HiltViewModel
-class CardListVM @Inject constructor(
+class CardsVM @Inject constructor(
     private val repository: CardsRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {

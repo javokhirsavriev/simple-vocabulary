@@ -8,7 +8,6 @@
     android:background="@drawable/bg_ripple">
 
     <LinearLayout
-        android:id="@+id/layoutWord"
         style="@style/LayoutVertical"
         android:layout_width="@dimen/dp_0"
         android:paddingStart="@dimen/dp_16"
@@ -16,7 +15,7 @@
         android:paddingEnd="@dimen/dp_16"
         android:paddingBottom="@dimen/dp_12"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonVolume"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -31,18 +30,6 @@
             android:layout_marginTop="@dimen/dp_4"
             android:textColor="@color/colorGray500" />
     </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/buttonVolume"
-        style="@style/NormalFabButton"
-        android:layout_margin="@dimen/dp_12"
-        android:contentDescription="@string/content_description"
-        android:src="@drawable/ic_volume_up"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:materialThemeOverlay="@style/ThemeFabAppWhite" />
 
     <View
         style="@style/DividerView"

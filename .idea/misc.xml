@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../../layout/custom_preview.xml" value="0.38333333333333336" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.207" />
         <entry key="app/src/main/res/drawable/bg_custom_menu.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/bg_custom_menuu.xml" value="0.1895" />
@@ -34,6 +35,7 @@
         <entry key="app/src/main/res/menu/menu_words.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.207" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.207" />
+        <entry key="components/src/main/res/drawable/bg_black_rounded.xml" value="0.207" />
         <entry key="components/src/main/res/drawable/bg_count_correct.xml" value="0.207" />
         <entry key="components/src/main/res/drawable/bg_count_incorrect.xml" value="0.207" />
         <entry key="components/src/main/res/drawable/bg_custom_menu.xml" value="0.1975" />
@@ -44,6 +46,8 @@
         <entry key="components/src/main/res/drawable/bg_ripple_layout.xml" value="0.1975" />
         <entry key="components/src/main/res/drawable/ic_add.xml" value="0.207" />
         <entry key="components/src/main/res/drawable/ic_arrow_back.xml" value="0.207" />
+        <entry key="components/src/main/res/drawable/ic_arrow_forward.xml" value="0.207" />
+        <entry key="components/src/main/res/drawable/ic_arrow_rewind.xml" value="0.207" />
         <entry key="components/src/main/res/drawable/ic_clear_all.xml" value="0.115" />
         <entry key="components/src/main/res/drawable/ic_close.xml" value="0.1975" />
         <entry key="components/src/main/res/drawable/ic_copy.xml" value="0.207" />
@@ -80,9 +84,19 @@
         <entry key="ui-cards/src/main/res/layout/fragment_card_list.xml" value="0.3609375" />
         <entry key="ui-cards/src/main/res/layout/item_card.xml" value="0.3609375" />
         <entry key="ui-flashcards/src/main/res/layout/activity_flashcards.xml" value="0.3351851851851852" />
+        <entry key="ui-flashcards/src/main/res/layout/fragment_card2.xml" value="0.37552083333333336" />
+        <entry key="ui-flashcards/src/main/res/layout/fragment_cards-layout.xml" value="0.37552083333333336" />
+        <entry key="ui-flashcards/src/main/res/layout/fragment_cards.xml" value="0.37552083333333336" />
+        <entry key="ui-flashcards/src/main/res/layout/fragment_cards2.xml" value="0.37552083333333336" />
+        <entry key="ui-flashcards/src/main/res/layout/fragment_cards_congratulation.xml" value="0.37552083333333336" />
+        <entry key="ui-flashcards/src/main/res/layout/fragment_flashcards.xml" value="0.2355621337890624" />
         <entry key="ui-flashcards/src/main/res/layout/fragment_start.xml" value="0.3175925925925926" />
+        <entry key="ui-flashcards/src/main/res/layout/item_card.xml" value="0.37552083333333336" />
+        <entry key="ui-flashcards/src/main/res/layout/item_card2.xml" value="0.37552083333333336" />
+        <entry key="ui-flashcards/src/main/res/layout/item_flashcard.xml" value="0.37552083333333336" />
         <entry key="ui-flashcards/src/main/res/layout/layout_flashcard_options.xml" value="0.37552083333333336" />
         <entry key="ui-flashcards/src/main/res/layout/layout_flashcard_quiz_tips.xml" value="0.37552083333333336" />
+        <entry key="ui-flashcards/src/main/res/layout/layout_flashcard_tips_sheet.xml" value="0.37552083333333336" />
         <entry key="ui-flashcards/src/main/res/layout/layout_quiz_tips.xml" value="0.3090324119285299" />
         <entry key="ui-setdetail/src/main/res/layout/fragment_set_detail.xml" value="0.3609375" />
         <entry key="ui-sets/src/main/res/layout/fragment_set_detail.xml" value="0.3609375" />

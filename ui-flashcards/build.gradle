@@ -11,9 +11,9 @@ dependencies {
     implementation project(":base")
     implementation project(":components")
     implementation project(":data")
-    implementation project(":preferences")
     implementation project(":repository")
     implementation project(":utils")
+    implementation project(":ui-swipe-cards")
 
     /* JetBrains (Kotlin) libraries */
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
@@ -28,5 +28,6 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
 
     /* Other libraries */
+    implementation "nl.dionsegijn:konfetti-xml:$konfettiVersion"
     implementation "com.github.javokhirsavriev:common-extensions:$commonExtensionsVersion"
 }

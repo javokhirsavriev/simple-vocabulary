@@ -16,6 +16,7 @@
       <module name="simple-vocabulary.ui-flashcards" target="11" />
       <module name="simple-vocabulary.ui-setdetail" target="11" />
       <module name="simple-vocabulary.ui-sets" target="11" />
+      <module name="simple-vocabulary.ui-swipe-cards" target="11" />
       <module name="simple-vocabulary.utils" target="11" />
     </bytecodeTargetLevel>
   </component>
