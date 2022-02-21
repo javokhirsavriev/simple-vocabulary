@@ -18,8 +18,8 @@ import uz.javokhirdev.svocabulary.data.SET_ID
 import uz.javokhirdev.svocabulary.data.UIState
 import uz.javokhirdev.svocabulary.data.model.CardModel
 import uz.javokhirdev.svocabulary.data.onSuccess
+import uz.javokhirdev.svocabulary.presentation.cards.databinding.FragmentCardsBinding
 import uz.javokhirdev.svocabulary.presentation.components.R
-import uz.javokhirdev.svocabulary.presentation.components.databinding.FragmentCardsBinding
 import uz.javokhirdev.svocabulary.presentation.flashcards.FlashcardsActivity
 import uz.javokhirdev.svocabulary.utils.TTSManager
 import uz.javokhirdev.svocabulary.utils.copy
@@ -27,8 +27,9 @@ import uz.javokhirdev.svocabulary.utils.showDialog
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CardsFragment : Fragment(R.layout.fragment_cards), CardsAdapter.CardListener,
-    ActionSheet.ActionSheetListener {
+class CardsFragment :
+    Fragment(uz.javokhirdev.svocabulary.presentation.cards.R.layout.fragment_cards),
+    CardsAdapter.CardListener, ActionSheet.ActionSheetListener {
 
     private val binding by viewBinding(FragmentCardsBinding::bind)
 
@@ -56,11 +57,11 @@ class CardsFragment : Fragment(R.layout.fragment_cards), CardsAdapter.CardListen
             toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
             toolbar.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
-                    R.id.addCard -> {
+                    uz.javokhirdev.svocabulary.presentation.cards.R.id.addCard -> {
                         navigateToCardDetail()
                         true
                     }
-                    R.id.clearAll -> {
+                    uz.javokhirdev.svocabulary.presentation.cards.R.id.clearAll -> {
                         clearAll()
                         true
                     }

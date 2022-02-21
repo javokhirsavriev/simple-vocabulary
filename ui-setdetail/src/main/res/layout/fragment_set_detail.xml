@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/LayoutVertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/LayoutVertical"
+    tools:context="uz.javokhirdev.svocabulary.presentation.setdetail.SetDetailFragment">
 
     <com.google.android.material.appbar.AppBarLayout style="@style/AppBarStyle">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/ToolbarStyle"
-            app:navigationIcon="@drawable/ic_close" />
+            app:navigationIcon="@drawable/ic_arrow_back" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <View style="@style/DividerView" />
@@ -20,18 +22,29 @@
             android:gravity="center_horizontal"
             android:padding="@dimen/dp_20">
 
-            <EditText
-                android:id="@+id/inputTerm"
-                style="@style/InputView"
-                android:hint="@string/enter_term"
-                android:importantForAutofill="no" />
+            <TextView
+                style="@style/Text16sp"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:gravity="center_horizontal"
+                android:text="@string/set_description"
+                android:textColor="@color/colorGray500" />
 
             <EditText
-                android:id="@+id/inputDefinition"
+                android:id="@+id/inputTitle"
+                style="@style/InputView"
+                android:layout_marginTop="@dimen/dp_24"
+                android:hint="@string/enter_title"
+                android:importantForAutofill="no"
+                android:maxLength="40" />
+
+            <EditText
+                android:id="@+id/inputDescription"
                 style="@style/InputView"
                 android:layout_marginTop="@dimen/dp_16"
-                android:hint="@string/enter_definition"
-                android:importantForAutofill="no" />
+                android:hint="@string/enter_description"
+                android:importantForAutofill="no"
+                android:maxLength="60" />
 
             <uz.javokhirdev.svocabulary.presentation.components.IndicatorButton
                 android:id="@+id/buttonSave"

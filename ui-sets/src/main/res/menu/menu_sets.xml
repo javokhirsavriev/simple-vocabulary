@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/createSet"
-        android:icon="@drawable/ic_add"
-        android:title="@string/create_set"
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings"
         app:showAsAction="ifRoom" />
 </menu>

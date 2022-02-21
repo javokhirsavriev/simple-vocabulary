@@ -12,11 +12,9 @@ dependencies {
     implementation project(":base")
     implementation project(":components")
     implementation project(":data")
+    implementation project(":preferences")
     implementation project(":repository")
     implementation project(":utils")
-    implementation project(":ui-cards")
-    implementation project(":ui-setdetail")
-    implementation project(":ui-settings")
 
     /* JetBrains (Kotlin) libraries */
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
@@ -24,7 +22,6 @@ dependencies {
     /* Android libraries */
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
-    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
 
     /* Google libraries */
     implementation "com.google.android.material:material:$materialVersion"

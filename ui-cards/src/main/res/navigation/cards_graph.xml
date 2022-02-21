@@ -11,7 +11,7 @@
         android:id="@+id/cardsFragment"
         android:name="uz.javokhirdev.svocabulary.presentation.cards.CardsFragment"
         android:label="@string/cards"
-        tools:layout="@layout/fragment_flashcards">
+        tools:layout="@layout/fragment_cards">
         <action
             android:id="@+id/cardsToDetail"
             app:destination="@id/cardDetail"
