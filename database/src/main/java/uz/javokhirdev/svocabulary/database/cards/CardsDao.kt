@@ -36,4 +36,7 @@ interface CardsDao {
 
     @Query("DELETE FROM cards WHERE card_set_id = :setId")
     suspend fun deleteCardsBySetId(setId: Long)
+
+    @Query("DELETE FROM cards")
+    suspend fun deleteAll()
 }

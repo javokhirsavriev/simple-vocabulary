@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="uz.javokhirdev.svocabulary.presentation.sets.SetsFragment">
 
     <com.google.android.material.appbar.AppBarLayout style="@style/AppBarStyle">
 
@@ -23,13 +25,27 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSets"
             style="@style/RecyclerView"
-            android:padding="@dimen/dp_12" />
+            android:paddingStart="@dimen/dp_12"
+            android:paddingTop="@dimen/dp_12"
+            android:paddingEnd="@dimen/dp_12"
+            android:paddingBottom="@dimen/dp_72" />
 
         <uz.javokhirdev.svocabulary.presentation.components.LoadingView
             android:id="@+id/loadingView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/buttonAdd"
+            style="@style/NormalExtendedFabButton"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/dp_24"
+            android:paddingStart="@dimen/dp_16"
+            android:paddingEnd="@dimen/dp_20"
+            android:text="@string/add_set"
+            app:icon="@drawable/ic_add"
+            app:iconPadding="@dimen/dp_12" />
     </FrameLayout>
 
 </LinearLayout>

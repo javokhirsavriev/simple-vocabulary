@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import uz.javokhirdev.svocabulary.data.UIState
 import uz.javokhirdev.svocabulary.data.model.CardModel
+import uz.javokhirdev.svocabulary.data.onSuccess
 import uz.javokhirdev.svocabulary.repository.CardsRepository
 import javax.inject.Inject
 
@@ -22,7 +23,12 @@ class FlashcardsVM @Inject constructor(
 
     fun getCards(setId: Long) {
         viewModelScope.launch {
-            cardsRepository.getCards(setId).collectLatest { cardsData.value = it }
+            cardsRepository.getCards(setId).collectLatest {
+                it onSuccess {
+                    cardsData.value = it
+                    cardsData.value = UIState.Idle
+                }
+            }
         }
     }
 }

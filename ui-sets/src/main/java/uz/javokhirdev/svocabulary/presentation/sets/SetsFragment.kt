@@ -16,12 +16,12 @@ import uz.javokhirdev.svocabulary.data.UIState
 import uz.javokhirdev.svocabulary.data.model.SetModel
 import uz.javokhirdev.svocabulary.data.onSuccess
 import uz.javokhirdev.svocabulary.presentation.components.R
-import uz.javokhirdev.svocabulary.presentation.components.databinding.FragmentSetsBinding
+import uz.javokhirdev.svocabulary.presentation.sets.databinding.FragmentSetsBinding
 import uz.javokhirdev.svocabulary.utils.copy
 
 @AndroidEntryPoint
-class SetsFragment : Fragment(R.layout.fragment_sets), SetsAdapter.SetListener,
-    ActionSheet.ActionSheetListener {
+class SetsFragment : Fragment(uz.javokhirdev.svocabulary.presentation.sets.R.layout.fragment_sets),
+    SetsAdapter.SetListener, ActionSheet.ActionSheetListener {
 
     private val binding by viewBinding(FragmentSetsBinding::bind)
 
@@ -40,8 +40,8 @@ class SetsFragment : Fragment(R.layout.fragment_sets), SetsAdapter.SetListener,
         with(binding) {
             toolbar.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
-                    R.id.createSet -> {
-                        navigateToSetDetail()
+                    uz.javokhirdev.svocabulary.presentation.sets.R.id.settings -> {
+                        navigateToSettings()
                         true
                     }
                     else -> false
@@ -49,6 +49,8 @@ class SetsFragment : Fragment(R.layout.fragment_sets), SetsAdapter.SetListener,
             }
 
             rvSets.vertical().adapter = setsAdapter
+
+            buttonAdd.onClick { navigateToSetDetail() }
         }
 
         with(viewModel) {
@@ -125,6 +127,11 @@ class SetsFragment : Fragment(R.layout.fragment_sets), SetsAdapter.SetListener,
             setId = item.id ?: NOT_ID,
             setTitle = item.title ?: getString(R.string.cards)
         )
+        findNavController().navigate(direction)
+    }
+
+    private fun navigateToSettings() {
+        val direction = SetsFragmentDirections.setsToSettings()
         findNavController().navigate(direction)
     }
 

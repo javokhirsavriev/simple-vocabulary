@@ -98,4 +98,17 @@ class SetsRepository @Inject constructor(
         emit(UIState.loading(false))
         emit(UIState.success(false))
     }.flowOn(dispatcher.getIO())
+
+    suspend fun deleteAll() = flow {
+        emit(UIState.loading(true))
+
+        setsDao.deleteAll()
+        cardsDao.deleteAll()
+
+        emit(UIState.loading(false))
+        emit(UIState.success(true))
+    }.catch {
+        emit(UIState.loading(false))
+        emit(UIState.success(false))
+    }.flowOn(dispatcher.getIO())
 }

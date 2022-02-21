@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/LayoutVertical"
+    tools:context="uz.javokhirdev.svocabulary.presentation.settings.SettingsFragment">
+
+    <com.google.android.material.appbar.AppBarLayout style="@style/AppBarStyle">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            style="@style/ToolbarStyle"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:title="@string/settings" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <View style="@style/DividerView" />
+
+    <androidx.core.widget.NestedScrollView style="@style/ScrollView">
+
+        <LinearLayout
+            style="@style/LayoutVertical"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/dp_20">
+
+            <TextView
+                android:id="@+id/textDarkMode"
+                style="@style/Text16sp"
+                android:layout_width="match_parent"
+                android:background="@drawable/bg_ripple_layout"
+                android:fontFamily="@font/bold"
+                android:padding="@dimen/dp_16"
+                android:text="@string/dark_mode"
+                app:drawableEndCompat="@drawable/ic_dark_mode" />
+
+            <LinearLayout
+                style="@style/LayoutVertical"
+                android:layout_marginTop="@dimen/dp_16"
+                android:background="@drawable/bg_ripple_layout"
+                android:padding="@dimen/dp_1">
+
+                <TextView
+                    android:id="@+id/textContact"
+                    style="@style/Text16sp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/bg_settings_item"
+                    android:fontFamily="@font/bold"
+                    android:padding="@dimen/dp_16"
+                    android:text="@string/contact_developer"
+                    app:drawableEndCompat="@drawable/ic_mail" />
+
+                <View
+                    style="@style/DividerView"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16" />
+
+                <TextView
+                    android:id="@+id/textReset"
+                    style="@style/Text16sp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/bg_settings_item"
+                    android:fontFamily="@font/bold"
+                    android:padding="@dimen/dp_16"
+                    android:text="@string/reset_progress"
+                    app:drawableEndCompat="@drawable/ic_refresh" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textShare"
+                style="@style/Text16sp"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp_16"
+                android:background="@drawable/bg_ripple_layout"
+                android:fontFamily="@font/bold"
+                android:padding="@dimen/dp_16"
+                android:text="@string/share_application"
+                app:drawableEndCompat="@drawable/ic_share" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

@@ -13,11 +13,11 @@ import uz.javokhirdev.svocabulary.data.model.CardModel
 import uz.javokhirdev.svocabulary.data.onFailure
 import uz.javokhirdev.svocabulary.data.onLoading
 import uz.javokhirdev.svocabulary.data.onSuccess
+import uz.javokhirdev.svocabulary.presentation.carddetail.databinding.FragmentCardDetailBinding
 import uz.javokhirdev.svocabulary.presentation.components.R
-import uz.javokhirdev.svocabulary.presentation.components.databinding.FragmentCardDetailBinding
 
 @AndroidEntryPoint
-class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
+class CardDetailFragment : Fragment(uz.javokhirdev.svocabulary.presentation.carddetail.R.layout.fragment_card_detail) {
 
     private val binding by viewBinding(FragmentCardDetailBinding::bind)
 

@@ -22,6 +22,7 @@ android {
 }
 
 dependencies {
+    implementation project(":preferences")
     implementation project(":ui-sets")
 
     /* Android libraries */

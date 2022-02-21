@@ -13,10 +13,11 @@ import uz.javokhirdev.svocabulary.data.model.SetModel
 import uz.javokhirdev.svocabulary.data.onLoading
 import uz.javokhirdev.svocabulary.data.onSuccess
 import uz.javokhirdev.svocabulary.presentation.components.R
-import uz.javokhirdev.svocabulary.presentation.components.databinding.FragmentSetDetailBinding
+import uz.javokhirdev.svocabulary.presentation.setdetail.databinding.FragmentSetDetailBinding
 
 @AndroidEntryPoint
-class SetDetailFragment : Fragment(R.layout.fragment_set_detail) {
+class SetDetailFragment :
+    Fragment(uz.javokhirdev.svocabulary.presentation.setdetail.R.layout.fragment_set_detail) {
 
     private val binding by viewBinding(FragmentSetDetailBinding::bind)
 

@@ -22,18 +22,16 @@
             android:id="@+id/sideContainer"
             style="@style/LayoutHorizontal"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
             android:layout_centerInParent="true">
 
             <TextView
                 android:id="@+id/textSideOne"
                 style="@style/Text16sp"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="@font/medium"
-                android:text="@string/side" />
+                android:fontFamily="@font/medium" />
 
             <TextView
-                android:id="@+id/textSideLearn"
+                android:id="@+id/textSideOneNumber"
                 style="@style/Text16sp"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/medium"
@@ -50,11 +48,10 @@
                 android:id="@+id/textSideTwo"
                 style="@style/Text16sp"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="@font/medium"
-                android:text="@string/side" />
+                android:fontFamily="@font/medium" />
 
             <TextView
-                android:id="@+id/textSideTranslation"
+                android:id="@+id/textSideTwoNumber"
                 style="@style/Text16sp"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/medium"
@@ -169,5 +166,10 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/buttonRemember"
         android:layout_below="@+id/topAppBar" />
+
+    <nl.dionsegijn.konfetti.xml.KonfettiView
+        android:id="@+id/konfettiView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>
