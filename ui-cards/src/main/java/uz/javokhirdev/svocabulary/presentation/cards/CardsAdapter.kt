@@ -10,10 +10,10 @@ import uz.javokhirdev.extensions.onClick
 import uz.javokhirdev.svocabulary.data.model.CardModel
 import uz.javokhirdev.svocabulary.presentation.cards.databinding.ItemCardBinding
 
-class CardListAdapter(
+class CardsAdapter(
     context: Context,
     private val listener: CardListener
-) : PagingDataAdapter<CardModel, CardListAdapter.ViewHolder>(DiffCallback()) {
+) : PagingDataAdapter<CardModel, CardsAdapter.ViewHolder>(DiffCallback()) {
 
     private val inflater = context.inflater
 
@@ -30,7 +30,6 @@ class CardListAdapter(
 
         init {
             with(binding) {
-                buttonVolume.onClick { getItem(layoutPosition)?.let { listener.onVolumeClick(it) } }
                 root.onClick { getItem(layoutPosition)?.let { listener.onCardClick(it) } }
                 root.setOnLongClickListener {
                     getItem(layoutPosition)?.let { listener.onCardLongClick(it) }
@@ -63,7 +62,5 @@ class CardListAdapter(
         fun onCardClick(item: CardModel)
 
         fun onCardLongClick(item: CardModel)
-
-        fun onVolumeClick(item: CardModel)
     }
 }

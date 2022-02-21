@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import uz.javokhirdev.extensions.dpToPx
 import uz.javokhirdev.svocabulary.data.WRAP_CONTENT
 

@@ -1,24 +1,51 @@
 package uz.javokhirdev.svocabulary.presentation.flashcards
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
+import android.view.animation.LinearInterpolator
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import uz.javokhirdev.extensions.*
-import uz.javokhirdev.svocabulary.data.*
+import uz.javokhirdev.svocabulary.data.NOT_ID
+import uz.javokhirdev.svocabulary.data.SET_ID
+import uz.javokhirdev.svocabulary.data.UIState
 import uz.javokhirdev.svocabulary.data.model.CardModel
+import uz.javokhirdev.svocabulary.data.onSuccess
 import uz.javokhirdev.svocabulary.presentation.components.R
-import uz.javokhirdev.svocabulary.presentation.flashcards.databinding.ActivityFlashcardsBinding
+import uz.javokhirdev.svocabulary.presentation.flashcards.data.TipsSheet
+import uz.javokhirdev.svocabulary.presentation.flashcards.databinding.FragmentFlashcardsBinding
+import uz.javokhirdev.svocabulary.swipecards.SwipeFlingAdapterView
+import uz.javokhirdev.svocabulary.utils.colorFilter
+import kotlin.math.abs
 
 @AndroidEntryPoint
 class FlashcardsActivity : AppCompatActivity() {
 
-    private val binding by lazy { ActivityFlashcardsBinding.inflate(layoutInflater) }
+    private val binding by lazy { FragmentFlashcardsBinding.inflate(layoutInflater) }
 
     private val viewModel by viewModels<FlashcardsVM>()
 
+    private val handler = Handler(Looper.getMainLooper())
+
+    private var flashcardsAdapter: FlashcardsAdapter? = null
+
+    private val forgotList = ArrayList<CardModel>()
+    private val itemsList = ArrayList<CardModel>()
+
+    private val cardRotationDuration = 100L
+    private var currentRound = 1
+    private var forgotCount = 0
+    private var rememberCount = 0
+    private val sideTextWidth = 0
     private var setId = NOT_ID
+
+    private var isCardAnimated = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,146 +56,269 @@ class FlashcardsActivity : AppCompatActivity() {
         configureClickListeners()
 
         with(viewModel) {
-            repeatingJobOnStarted { isFlashcardStarted.collectLatest { onFlashcardStartedState(it) } }
-            repeatingJobOnStarted { cards.collectLatest { onCardsState(it) } }
-            repeatingJobOnStarted { currentCard.collectLatest { onCurrentCardState(it) } }
+            getCards(setId)
 
-            count.observe(this@FlashcardsActivity) { onCountState(it) }
-            finished.observe(this@FlashcardsActivity) { onFinishedState(it) }
+            repeatingJobOnStarted { cards.collectLatest { onCardsState(it) } }
         }
     }
 
     private fun configureClickListeners() {
         with(binding) {
-            buttonClose.onClick { finish() }
-            buttonInfo.onClick {
-                val dialog = QuizTipsDialog()
-                supportFragmentManager.run { dialog.show(this, dialog.tag) }
-            }
-            buttonStart.onClick { viewModel.setFlashcardStarted() }
-            buttonCancel.onClick { viewModel.correctCurrentTerm(false) }
-            buttonDone.onClick { viewModel.correctCurrentTerm(true) }
-            buttonVolume.onClick { viewModel.sayCurrentTerm() }
-            buttonReset.onClick { viewModel.getCards(setId) }
+            "Round $currentRound".also { textRound.text = it }
 
-            textFront.autoSize(32)
-            textBack.autoSize(32)
+            buttonClose.onClick { finish() }
+            buttonInfo.onClick { showTipsSheet() }
+            buttonForgot.onClick { tapForgot() }
+            buttonRemember.onClick { tapRemember() }
         }
     }
 
-    private fun onFlashcardStartedState(uiState: UIState<Boolean>) {
-        uiState onSuccess {
-            data.orFalse().ifTrue {
-                viewModel.getCards(setId)
-            }.ifFalse {
-                showHideViews(
-                    isStartVisible = true
-                )
+    private fun configureFlashcardsAdapter() {
+        flashcardsAdapter = FlashcardsAdapter(this)
+        flashcardsAdapter?.let {
+            with(binding) {
+                swipeView.setAdapter(it)
+                swipeView.setFlingListener(object : SwipeFlingAdapterView.SwipeFlingListener {
+                    override fun removeFirstObjectInAdapter() {
+                        itemsList.removeAt(0)
+                        flashcardsAdapter?.notifyDataSetChanged()
+                        resetRememberForgetButtons()
+                    }
+
+                    override fun onLeftCardExit(dataObject: Any?) {
+                        if (dataObject is CardModel) {
+                            forgotCount += 1
+                            textForgotCount.text = forgotCount.toString()
+                            forgotList.add(dataObject)
+                        }
+                    }
+
+                    override fun onRightCardExit(dataObject: Any?) {
+                        rememberCount += 1
+                        textRememberCount.text = rememberCount.toString()
+                    }
+
+                    override fun onAdapterAboutToEmpty(itemsInAdapter: Int) {
+                        if (itemsInAdapter != 0) return
+
+                        if (forgotList.isNotEmpty()) {
+                            itemsList.addAll(forgotList)
+                            forgotList.clear()
+
+                            flashcardsAdapter?.setInitialItemsCount(itemsList.size)
+                            flashcardsAdapter?.notifyDataSetChanged()
+
+                            currentRound += 1
+
+                            roundContainer.layoutParams.height = roundContainer.height
+                            "Round $currentRound".also { textRoundSpec.text = it }
+
+                            textRoundSpec.y = roundContainer.height.toFloat()
+                            textRoundSpec.alpha = 0.0f
+
+                            textRound
+                                .animate()
+                                .y(-(roundContainer.height.toFloat()))
+                                .alpha(0.0f)
+                                .duration = 300
+
+                            textRoundSpec
+                                .animate()
+                                .y(0.0f)
+                                .alpha(1.0f)
+                                .setDuration(300)
+                                .withEndAction {
+                                    run {
+                                        "Round $currentRound".also { textRound.text = it }
+                                        textRound.y = 0.0f
+                                        textRound.alpha = 1.0f
+                                        textRoundSpec.alpha = 0.0f
+                                    }
+                                }
+
+                            swipeView.scaleX = 0.01f
+                            swipeView.scaleY = 0.01f
+                            swipeView
+                                .animate()
+                                .scaleX(1.0f)
+                                .scaleY(1.0f)
+                                .setDuration(400).interpolator = DecelerateInterpolator()
+
+                            rememberCount = 0
+                            textRememberCount.text = ""
+
+                            forgotCount = 0
+                            textForgotCount.text = ""
+
+                            return
+                        } else {
+                            finish()
+                        }
+                    }
+
+                    override fun onScroll(scrollProgressPercent: Float) {
+                        try {
+                            swipeView.selectedView?.let { view ->
+                                with(FlashcardsAdapter.ViewHolder(view)) {
+
+                                    val i = when {
+                                        scrollProgressPercent > 0f -> 1
+                                        scrollProgressPercent == 0f -> 0
+                                        else -> -1
+                                    }
+
+                                    if (i > 0) {
+                                        backgroundOverlay.background
+                                            .mutate()
+                                            .colorFilter(color(R.color.colorGreen))
+                                    } else {
+                                        backgroundOverlay.background
+                                            .mutate()
+                                            .colorFilter(color(R.color.colorRed))
+                                    }
+                                    backgroundOverlay.alpha = abs(scrollProgressPercent)
+                                    rootContainer.clearAnimation()
+                                    background.clearAnimation()
+
+                                    val abs = abs(scrollProgressPercent) * 0.4f + 0.6f
+
+                                    when {
+                                        scrollProgressPercent < 0f -> buttonForgot.alpha = abs
+                                        i > 0 -> buttonRemember.alpha = abs
+                                        else -> resetRememberForgetButtons()
+                                    }
+                                }
+                            }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+                })
+
+                swipeView.setOnItemClickListener(object :
+                    SwipeFlingAdapterView.OnItemClickListener {
+                    override fun onItemClicked(itemPosition: Int, dataObject: Any?) {
+                        swipeView.selectedView?.let { view ->
+                            val viewHolder = FlashcardsAdapter.ViewHolder(view)
+                            view.isEnabled = false
+                            rotateCard(viewHolder)
+                        }
+                    }
+                })
             }
         }
+
+        val runSwipe = Runnable { run { binding.swipeView.selectedView?.isEnabled = false } }
+        val runFirstCard = Runnable { run { firstCardRotationHint() } }
+
+        handler.post(runSwipe)
+        handler.postDelayed(runFirstCard, 500L)
+
+        flashcardsAdapter?.setItems(itemsList)
+        flashcardsAdapter?.notifyDataSetChanged()
     }
 
     private fun onCardsState(uiState: UIState<List<CardModel>>) {
-        with(binding) {
-            showHideViews()
-
-            uiState onLoading {
-                loadingView.onLoading(isLoading)
-            } onFailure {
-                loadingView.onFailure(message)
-            }
-        }
-    }
-
-    private fun onCurrentCardState(uiState: UIState<CardModel>) {
         uiState onSuccess {
-            setCurrentCard(data)
+            itemsList.clear()
+            itemsList.addAll(data.orEmpty())
+
+            configureFlashcardsAdapter()
         }
     }
 
-    private fun onCountState(data: CountData) {
-        with(binding) {
-            "${data.current + 1} / ${data.all}".also { textCount.text = it }
-            textCountCorrect.text = data.correct.toString()
-            textCountIncorrect.text = data.incorrect.toString()
-        }
-    }
+    private fun firstCardRotationHint() {
+        isCardAnimated = true
 
-    private fun onFinishedState(data: FinishedData) {
-        data.isFinished.ifTrue {
-            showHideViews(
-                isFinishVisible = true
-            )
+        val swipeFlingAdapterView = binding.swipeView
+        val childAt = swipeFlingAdapterView.getChildAt(swipeFlingAdapterView.childCount - 1)
+        val viewHolder = FlashcardsAdapter.ViewHolder(childAt)
 
-            when (data.correct) {
-                data.all -> {
-                    with(binding) {
-                        buttonReset.beGone()
-                        buttonContinue.setButtonText(getString(R.string.study_again))
-                        buttonContinue.onClick { viewModel.getCards(setId) }
-
-                        textFinishEmoji.text = getString(R.string.emoji_1)
-                        textFinishDescription.text = getString(R.string.congratulations)
-                    }
-                }
-                0 -> {
-                    with(binding) {
-                        buttonReset.beVisible()
-                        buttonContinue.setButtonText(getString(R.string.continue_str))
-                        buttonContinue.onClick { viewModel.continueIncorrectFlashcards() }
-
-                        textFinishEmoji.text = getString(R.string.emoji_2)
-                        "Keep practising to master ${data.incorrect} remaining terms.".also {
-                            textFinishDescription.text = it
+        viewHolder.rootView
+            .animate()
+            .rotationY(40.0f)
+            .setDuration(300)
+            .setInterpolator(DecelerateInterpolator())
+            .withEndAction {
+                run {
+                    viewHolder.rootView
+                        .animate()
+                        .setInterpolator(AccelerateInterpolator())
+                        .rotationY(0.0f)
+                        .setDuration(300)
+                        .withEndAction {
+                            run {
+                                isCardAnimated = false
+                                binding.swipeView.selectedView?.isEnabled = true
+                            }
                         }
-                    }
-                }
-                else -> {
-                    with(binding) {
-                        buttonReset.beVisible()
-                        buttonContinue.setButtonText(getString(R.string.continue_str))
-                        buttonContinue.onClick { viewModel.continueIncorrectFlashcards() }
-
-                        textFinishEmoji.text = getString(R.string.emoji_2)
-                        "You just learnt ${data.correct} term! Keep practising to master ${data.incorrect} remaining term.".also {
-                            textFinishDescription.text = it
-                        }
-                    }
                 }
             }
-        }
     }
 
-    private fun setCurrentCard(data: CardModel? = null) {
-        setCurrentTermDefinition(data)
+    private fun rotateCard(viewHolder: FlashcardsAdapter.ViewHolder) {
+        isCardAnimated = true
 
-        showHideViews(
-            isInfoVisible = true,
-            isGameVisible = true
-        )
+        viewHolder.rootView
+            .animate()
+            .rotationY(90.0f)
+            .setDuration(cardRotationDuration)
+            .setInterpolator(LinearInterpolator())
+            .withEndAction {
+                runOnUiThread {
+                    run {
+                        with(viewHolder) {
+                            if (textFront.isVisible) {
+                                textFront.beInvisible()
+                                textBack.beVisible()
+                                return@runOnUiThread
+                            }
+
+                            textFront.beVisible()
+                            textBack.beInvisible()
+                        }
+                    }
+                }
+
+                with(viewHolder) {
+                    rootView.rotationY = -90.0f
+                    rootView.animate()
+                        .setInterpolator(LinearInterpolator())
+                        .rotationY(0.0f)
+                        .setDuration(cardRotationDuration)
+                        .withEndAction {
+                            run {
+                                with(binding) {
+                                    swipeView.selectedView?.isEnabled = true
+                                    isCardAnimated = false
+                                }
+                            }
+                        }
+                }
+            }
     }
 
-    private fun setCurrentTermDefinition(data: CardModel? = null) {
+    private fun resetRememberForgetButtons() {
         with(binding) {
-            if (flipView.isBackSide) flipView.flipTheView()
-
-            textFront.text = data?.term.orEmpty()
-            textBack.text = data?.definition.orEmpty()
+            buttonForgot.alpha = 0.6f
+            buttonRemember.alpha = 0.6f
         }
     }
 
-    private fun showHideViews(
-        isInfoVisible: Boolean = false,
-        isStartVisible: Boolean = false,
-        isFinishVisible: Boolean = false,
-        isGameVisible: Boolean = false,
-    ) {
-        with(binding) {
-            buttonInfo.beVisibleIf(isInfoVisible)
-            layoutStart.beVisibleIf(isStartVisible)
-            layoutFinish.beVisibleIf(isFinishVisible)
-            textCount.beVisibleIf(isGameVisible)
-            layoutGame.beVisibleIf(isGameVisible)
+    private fun tapForgot() {
+        if (!isCardAnimated) {
+            binding.swipeView.topCardListener?.selectLeft()
         }
+    }
+
+    private fun tapRemember() {
+        if (!isCardAnimated) {
+            binding.swipeView.topCardListener?.selectRight()
+        }
+    }
+
+    private fun showTipsSheet() {
+        val dialog = TipsSheet()
+        supportFragmentManager.run { dialog.show(this, dialog.tag) }
     }
 }

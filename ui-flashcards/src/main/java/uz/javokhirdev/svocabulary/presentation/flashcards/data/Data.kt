@@ -1,4 +1,4 @@
-package uz.javokhirdev.svocabulary.presentation.flashcards
+package uz.javokhirdev.svocabulary.presentation.flashcards.data
 
 data class CountData(
     val current: Int = 0,

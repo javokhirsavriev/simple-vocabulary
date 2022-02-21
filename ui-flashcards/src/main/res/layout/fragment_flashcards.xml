@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FlashcardsActivity">
+
+    <RelativeLayout
+        android:id="@+id/topAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        android:background="@color/colorWhite">
+
+        <ImageButton
+            android:id="@+id/buttonClose"
+            style="@style/ImageButton"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/ic_close" />
+
+        <LinearLayout
+            android:id="@+id/sideContainer"
+            style="@style/LayoutHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:id="@+id/textSideOne"
+                style="@style/Text16sp"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/medium"
+                android:text="@string/side" />
+
+            <TextView
+                android:id="@+id/textSideLearn"
+                style="@style/Text16sp"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/medium"
+                android:text="1" />
+
+            <TextView
+                android:id="@+id/textSideDot"
+                style="@style/Text16sp"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/medium"
+                android:text="  •  " />
+
+            <TextView
+                android:id="@+id/textSideTwo"
+                style="@style/Text16sp"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/medium"
+                android:text="@string/side" />
+
+            <TextView
+                android:id="@+id/textSideTranslation"
+                style="@style/Text16sp"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/medium"
+                android:text="2" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/buttonInfo"
+            style="@style/ImageButton"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/ic_info" />
+
+        <View
+            style="@style/DividerView"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/roundContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topAppBar"
+        android:layout_marginTop="@dimen/dp_12">
+
+        <TextView
+            android:id="@+id/textRound"
+            style="@style/Text14sp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/colorGray500" />
+
+        <TextView
+            android:id="@+id/textRoundSpec"
+            style="@style/Text14sp"
+            android:layout_gravity="center_horizontal"
+            android:alpha="0"
+            android:textColor="@color/colorGray500" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonForgot"
+        style="@style/LayoutVertical"
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/dp_36"
+        android:layout_marginBottom="@dimen/dp_24"
+        android:alpha="0.6"
+        android:stateListAnimator="@animator/animation_selector">
+
+        <ImageView
+            style="@style/ImageBase"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/ic_arrow_rewind" />
+
+        <LinearLayout
+            style="@style/LayoutHorizontal"
+            android:layout_width="wrap_content">
+
+            <TextView
+                style="@style/Text16sp"
+                android:fontFamily="@font/medium"
+                android:text="@string/forgot" />
+
+            <TextView
+                android:id="@+id/textForgotCount"
+                style="@style/Text16sp"
+                android:layout_marginStart="@dimen/dp_8"
+                android:fontFamily="@font/medium" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonRemember"
+        style="@style/LayoutVertical"
+        android:layout_width="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/dp_36"
+        android:layout_marginBottom="@dimen/dp_24"
+        android:alpha="0.6"
+        android:stateListAnimator="@animator/animation_selector">
+
+        <ImageView
+            style="@style/ImageBase"
+            android:layout_gravity="end"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/ic_arrow_forward" />
+
+        <LinearLayout
+            style="@style/LayoutHorizontal"
+            android:layout_width="wrap_content">
+
+            <TextView
+                style="@style/Text16sp"
+                android:fontFamily="@font/medium"
+                android:text="@string/know_it" />
+
+            <TextView
+                android:id="@+id/textRememberCount"
+                style="@style/Text16sp"
+                android:layout_marginStart="@dimen/dp_8"
+                android:fontFamily="@font/medium" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <uz.javokhirdev.svocabulary.swipecards.SwipeFlingAdapterView
+        android:id="@+id/swipeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttonRemember"
+        android:layout_below="@+id/topAppBar" />
+
+</RelativeLayout>

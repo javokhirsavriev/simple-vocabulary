@@ -27,19 +27,19 @@ import uz.javokhirdev.svocabulary.utils.showDialog
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CardsFragment : Fragment(R.layout.fragment_cards), CardListAdapter.CardListener,
+class CardsFragment : Fragment(R.layout.fragment_cards), CardsAdapter.CardListener,
     ActionSheet.ActionSheetListener {
 
     private val binding by viewBinding(FragmentCardsBinding::bind)
 
-    private val viewModel by viewModels<CardListVM>()
+    private val viewModel by viewModels<CardsVM>()
 
     private val args by navArgs<CardsFragmentArgs>()
 
     @Inject
     lateinit var ttsManager: TTSManager
 
-    private var cardListAdapter: CardListAdapter? = null
+    private var cardsAdapter: CardsAdapter? = null
 
     private var selectedCard: CardModel? = null
 
@@ -48,8 +48,8 @@ class CardsFragment : Fragment(R.layout.fragment_cards), CardListAdapter.CardLis
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        cardListAdapter = CardListAdapter(requireContext(), this)
-        cardListAdapter?.addLoadStateListener { onCardsState(it) }
+        cardsAdapter = CardsAdapter(requireContext(), this)
+        cardsAdapter?.addLoadStateListener { onCardsState(it) }
 
         with(binding) {
             toolbar.title = args.setTitle
@@ -68,7 +68,7 @@ class CardsFragment : Fragment(R.layout.fragment_cards), CardListAdapter.CardLis
                 }
             }
 
-            rvCards.vertical().adapter = cardListAdapter
+            rvCards.vertical().adapter = cardsAdapter
 
             inputSearch.setText(keywords)
             inputSearch.onTextChangeListener { getCards(this) }
@@ -89,13 +89,11 @@ class CardsFragment : Fragment(R.layout.fragment_cards), CardListAdapter.CardLis
         super.onDestroyView()
     }
 
-    override fun onCardClick(item: CardModel) = navigateToCardDetail(item.id)
-
-    override fun onCardLongClick(item: CardModel) = showActionSheet(item)
-
-    override fun onVolumeClick(item: CardModel) {
+    override fun onCardClick(item: CardModel) {
         item.term?.let { ttsManager.say(it) }
     }
+
+    override fun onCardLongClick(item: CardModel) = showActionSheet(item)
 
     override fun onSetSheetAction(sheetState: SheetState) {
         selectedCard?.let { card ->
@@ -123,7 +121,7 @@ class CardsFragment : Fragment(R.layout.fragment_cards), CardListAdapter.CardLis
                         loadingView.onLoading(true)
                     }
                     is LoadState.NotLoading -> {
-                        if (cardListAdapter?.itemCount == 0) {
+                        if (cardsAdapter?.itemCount == 0) {
                             loadingView.onFailure()
                         } else {
                             rvCards.beVisible()
@@ -155,7 +153,7 @@ class CardsFragment : Fragment(R.layout.fragment_cards), CardListAdapter.CardLis
         keywords = text
 
         repeatingJobOnStarted {
-            viewModel.getCards(keywords).collectLatest { cardListAdapter?.submitData(it) }
+            viewModel.getCards(keywords).collectLatest { cardsAdapter?.submitData(it) }
         }
     }
 

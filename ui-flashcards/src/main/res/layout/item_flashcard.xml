@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="380dp"
+    android:layout_gravity="center_vertical"
+    android:layout_marginStart="@dimen/dp_12"
+    android:layout_marginEnd="@dimen/dp_12"
+    android:animateLayoutChanges="true"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:padding="@dimen/dp_12">
+
+    <RelativeLayout
+        android:id="@+id/rootContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        tools:ignore="UselessParent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_flashcard_layout" />
+
+        <View
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_flashcard_layout"
+            android:elevation="@dimen/dp_4" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:translationZ="@dimen/dp_6">
+
+            <View
+                android:id="@+id/backgroundOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0"
+                android:background="@drawable/bg_flashcard_layout" />
+
+            <TextView
+                android:id="@+id/textCount"
+                style="@style/Text16sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_16"
+                android:fontFamily="@font/medium" />
+
+            <TextView
+                android:id="@+id/textFront"
+                style="@style/Text20sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_56"
+                android:layout_marginEnd="@dimen/dp_12"
+                android:layout_marginBottom="@dimen/dp_56"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/textBack"
+                style="@style/Text20sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_56"
+                android:layout_marginEnd="@dimen/dp_12"
+                android:layout_marginBottom="@dimen/dp_56"
+                android:gravity="center"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/buttonPlay"
+                style="@style/ImageBase"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:clickable="true"
+                android:contentDescription="@string/content_description"
+                android:focusable="true"
+                android:src="@drawable/ic_volume_up" />
+        </RelativeLayout>
+    </RelativeLayout>
+</FrameLayout>

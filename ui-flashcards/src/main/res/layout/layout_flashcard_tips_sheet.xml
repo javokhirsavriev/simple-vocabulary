@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/LayoutVertical"
     android:padding="@dimen/dp_20">
 
-    <View
-        android:layout_width="@dimen/dp_42"
-        android:layout_height="@dimen/dp_6"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/bg_custom_menu"
-        android:backgroundTint="@color/colorGray300" />
-
     <TextView
         style="@style/Text20sp"
-        android:layout_marginTop="@dimen/dp_20"
         android:text="@string/quiz_tips" />
 
     <LinearLayout
         style="@style/LayoutHorizontal"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_24"
         android:gravity="center_vertical">
 
         <ImageView
@@ -108,10 +99,4 @@
                 android:text="@string/continue_studying_the_card" />
         </LinearLayout>
     </LinearLayout>
-
-    <uz.javokhirdev.svocabulary.presentation.components.IndicatorButton
-        android:id="@+id/buttonOk"
-        style="@style/UnelevatedButtonStyle"
-        android:layout_marginTop="@dimen/dp_24"
-        app:buttonText="@string/ok" />
 </LinearLayout>

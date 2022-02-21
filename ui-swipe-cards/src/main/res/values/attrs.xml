@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SwipeFlingAdapterView">
+        <attr name="swipeFlingStyle" format="reference"/>
+        <attr name="rotationDegrees" format="float"/>
+        <attr name="minAdapterStack" format="integer"/>
+        <attr name="maxVisible" format="integer"/>
+    </declare-styleable>
+</resources>
