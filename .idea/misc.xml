@@ -35,6 +35,7 @@
         <entry key="app/src/main/res/menu/menu_words.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.207" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.207" />
+        <entry key="app/src/main/res/xml/file_paths.xml" value="0.37552083333333336" />
         <entry key="components/src/main/res/drawable/bg_black_rounded.xml" value="0.207" />
         <entry key="components/src/main/res/drawable/bg_count_correct.xml" value="0.207" />
         <entry key="components/src/main/res/drawable/bg_count_incorrect.xml" value="0.207" />
@@ -56,7 +57,9 @@
         <entry key="components/src/main/res/drawable/ic_delete.xml" value="0.207" />
         <entry key="components/src/main/res/drawable/ic_done.xml" value="0.1975" />
         <entry key="components/src/main/res/drawable/ic_edit.xml" value="0.207" />
+        <entry key="components/src/main/res/drawable/ic_export.xml" value="0.207" />
         <entry key="components/src/main/res/drawable/ic_fitness.xml" value="0.207" />
+        <entry key="components/src/main/res/drawable/ic_import.xml" value="0.207" />
         <entry key="components/src/main/res/drawable/ic_info.xml" value="0.1975" />
         <entry key="components/src/main/res/drawable/ic_launcher_background.xml" value="0.207" />
         <entry key="components/src/main/res/drawable/ic_light_mode.xml" value="0.207" />

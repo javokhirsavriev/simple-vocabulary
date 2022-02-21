@@ -73,11 +73,6 @@ class CardDetailFragment : Fragment(uz.javokhirdev.svocabulary.presentation.card
     private fun setCardData(obj: CardModel? = null) {
         isNewCreate = obj?.id.isNull()
 
-        if (!isNewCreate) {
-            term = obj?.term.orEmpty()
-            definition = obj?.definition.orEmpty()
-        }
-
         val toolbarTitle = if (isNewCreate) R.string.create_card else R.string.edit_card
         val buttonText = if (isNewCreate) R.string.save else R.string.edit
         val buttonIcon = if (isNewCreate) R.drawable.ic_save else R.drawable.ic_edit
@@ -85,13 +80,18 @@ class CardDetailFragment : Fragment(uz.javokhirdev.svocabulary.presentation.card
         with(binding) {
             toolbar.setTitle(toolbarTitle)
 
-            if (!isNewCreate) {
+            buttonSave.setButtonText(getString(buttonText))
+            buttonSave.setIconResource(buttonIcon)
+        }
+
+        if (!isNewCreate) {
+            term = obj?.term.orEmpty()
+            definition = obj?.definition.orEmpty()
+
+            with(binding) {
                 inputTerm.setText(term)
                 inputDefinition.setText(definition)
             }
-
-            buttonSave.setButtonText(getString(buttonText))
-            buttonSave.setIconResource(buttonIcon)
         }
     }
 

@@ -29,9 +29,44 @@
                 android:layout_width="match_parent"
                 android:background="@drawable/bg_ripple_layout"
                 android:fontFamily="@font/bold"
+                android:gravity="center_vertical"
                 android:padding="@dimen/dp_16"
                 android:text="@string/dark_mode"
                 app:drawableEndCompat="@drawable/ic_dark_mode" />
+
+            <LinearLayout
+                style="@style/LayoutVertical"
+                android:layout_marginTop="@dimen/dp_16"
+                android:background="@drawable/bg_ripple_layout"
+                android:padding="@dimen/dp_1">
+
+                <TextView
+                    android:id="@+id/textImport"
+                    style="@style/Text16sp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/bg_settings_item"
+                    android:fontFamily="@font/bold"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dp_16"
+                    android:text="@string/import_data"
+                    app:drawableEndCompat="@drawable/ic_import" />
+
+                <View
+                    style="@style/DividerView"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16" />
+
+                <TextView
+                    android:id="@+id/textExport"
+                    style="@style/Text16sp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/bg_settings_item"
+                    android:fontFamily="@font/bold"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dp_16"
+                    android:text="@string/export_data"
+                    app:drawableEndCompat="@drawable/ic_export" />
+            </LinearLayout>
 
             <LinearLayout
                 style="@style/LayoutVertical"
@@ -45,6 +80,7 @@
                     android:layout_width="match_parent"
                     android:background="@drawable/bg_settings_item"
                     android:fontFamily="@font/bold"
+                    android:gravity="center_vertical"
                     android:padding="@dimen/dp_16"
                     android:text="@string/contact_developer"
                     app:drawableEndCompat="@drawable/ic_mail" />
@@ -60,6 +96,7 @@
                     android:layout_width="match_parent"
                     android:background="@drawable/bg_settings_item"
                     android:fontFamily="@font/bold"
+                    android:gravity="center_vertical"
                     android:padding="@dimen/dp_16"
                     android:text="@string/reset_progress"
                     app:drawableEndCompat="@drawable/ic_refresh" />
@@ -72,6 +109,7 @@
                 android:layout_marginTop="@dimen/dp_16"
                 android:background="@drawable/bg_ripple_layout"
                 android:fontFamily="@font/bold"
+                android:gravity="center_vertical"
                 android:padding="@dimen/dp_16"
                 android:text="@string/share_application"
                 app:drawableEndCompat="@drawable/ic_share" />

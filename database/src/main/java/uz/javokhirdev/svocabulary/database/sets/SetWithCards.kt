@@ -8,7 +8,7 @@ data class SetWithCards(
     @Embedded val set: SetEntity,
     @Relation(
         parentColumn = "set_id",
-        entityColumn = "card_id"
+        entityColumn = "card_set_id"
     )
     val cards: List<CardEntity>
 )
