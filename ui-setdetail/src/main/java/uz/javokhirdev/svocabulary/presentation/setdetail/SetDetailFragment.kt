@@ -69,7 +69,7 @@ class SetDetailFragment :
     }
 
     private fun setSetData(obj: SetModel? = null) {
-        isNewCreate = obj.isNull()
+        isNewCreate = obj?.id.isNull()
 
         val toolbarTitle = if (isNewCreate) R.string.create_set else R.string.edit_set
         val buttonText = if (isNewCreate) R.string.save else R.string.edit

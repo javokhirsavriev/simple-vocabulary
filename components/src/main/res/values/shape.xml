@@ -14,9 +14,4 @@
         <item name="cornerSize">@dimen/dp_8</item>
     </style>
 
-    <style name="ShapeOval">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
-    </style>
-
 </resources>

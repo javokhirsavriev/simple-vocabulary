@@ -7,7 +7,9 @@ import androidx.paging.map
 import kotlinx.coroutines.flow.*
 import uz.javokhirdev.svocabulary.data.PAGE_SIZE
 import uz.javokhirdev.svocabulary.data.UIState
+import uz.javokhirdev.svocabulary.data.model.CardModel
 import uz.javokhirdev.svocabulary.data.model.SetModel
+import uz.javokhirdev.svocabulary.data.model.SetWithCardsModel
 import uz.javokhirdev.svocabulary.database.cards.CardsDao
 import uz.javokhirdev.svocabulary.database.sets.SetEntity
 import uz.javokhirdev.svocabulary.database.sets.SetsDao
@@ -38,6 +40,29 @@ class SetsRepository @Inject constructor(
             }
         }
     }
+
+    suspend fun getSetsWithCards() = flow {
+        val entity = setsDao.getSetsWithCards().map {
+            SetWithCardsModel(
+                set = SetModel(
+                    id = it.set.id,
+                    title = it.set.title,
+                    description = it.set.description
+                ),
+                cards = it.cards.map { card ->
+                    CardModel(
+                        id = card.id,
+                        setId = card.setId,
+                        term = card.term,
+                        definition = card.definition
+                    )
+                }
+            )
+        }
+        emit(entity)
+    }.catch {
+        emit(emptyList())
+    }.flowOn(dispatcher.getIO())
 
     suspend fun getSetById(id: Long) = flow {
         emit(UIState.loading(true))

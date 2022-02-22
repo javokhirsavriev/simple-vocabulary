@@ -45,7 +45,8 @@
             android:paddingEnd="@dimen/dp_20"
             android:text="@string/add_set"
             app:icon="@drawable/ic_add"
-            app:iconPadding="@dimen/dp_12" />
+            app:iconPadding="@dimen/dp_12"
+            app:materialThemeOverlay="@style/ThemeFabAppWhite" />
     </FrameLayout>
 
 </LinearLayout>

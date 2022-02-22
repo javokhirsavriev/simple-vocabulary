@@ -7,19 +7,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.kaopiz.kprogresshud.KProgressHUD
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import uz.javokhirdev.extensions.onClick
-import uz.javokhirdev.extensions.repeatingJobOnStarted
-import uz.javokhirdev.extensions.shareText
-import uz.javokhirdev.extensions.viewBinding
-import uz.javokhirdev.svocabulary.data.APP_URL
+import uz.javokhirdev.extensions.*
+import uz.javokhirdev.svocabulary.data.*
 import uz.javokhirdev.svocabulary.preferences.AppStoreRepository
 import uz.javokhirdev.svocabulary.presentation.components.R
 import uz.javokhirdev.svocabulary.presentation.settings.databinding.FragmentSettingsBinding
-import uz.javokhirdev.svocabulary.utils.drawableEnd
-import uz.javokhirdev.svocabulary.utils.sendMail
-import uz.javokhirdev.svocabulary.utils.showDialog
+import uz.javokhirdev.svocabulary.utils.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -33,19 +30,43 @@ class SettingsFragment :
     @Inject
     lateinit var appStore: AppStoreRepository
 
+    private var progressHud: KProgressHUD? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        progressHud = KProgressHUD.create(requireContext())
+            .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+            .setCancellable(false)
+            .setAnimationSpeed(2)
+            .setDimAmount(0.5f)
 
         with(binding) {
             toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
 
+            textImport.onClick { }
+            textExport.onClick { requestStorage.launch(arrayOf(WES, RES)) }
             textContact.onClick { requireContext().sendMail() }
             textReset.onClick { resetProgress() }
             textShare.onClick { requireContext().shareText(APP_URL) }
         }
 
+        with(viewModel) {
+            repeatingJobOnStarted { export.collectLatest { onExportState(it) } }
+        }
+
         repeatingJobOnStarted {
             appStore.isDarkMode.collect { setDarkMode(it) }
+        }
+    }
+
+    private fun onExportState(uiState: UIState<Boolean>) {
+        uiState onLoading {
+            if (isLoading) progressHud?.show() else progressHud?.dismiss()
+        } onSuccess {
+            data.orFalse().ifTrue { toast(getString(R.string.csv_file_generated)) }
+        } onFailure {
+            toast(message)
         }
     }
 
@@ -80,4 +101,7 @@ class SettingsFragment :
             }
         }
     }
+
+    private val requestStorage =
+        requestPermissions { if (this) viewModel.exportDatabaseToCSVFile(requireContext()) }
 }

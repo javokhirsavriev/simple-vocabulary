@@ -9,6 +9,10 @@ interface SetsDao {
     @Query("SELECT * FROM sets ORDER BY created_at DESC")
     fun getSets(): PagingSource<Int, SetEntity>
 
+    @Transaction
+    @Query("SELECT * FROM sets")
+    fun getSetsWithCards(): List<SetWithCards>
+
     @Query("SELECT * FROM sets WHERE set_id = :id")
     suspend fun getSetById(id: Long): SetEntity?
 

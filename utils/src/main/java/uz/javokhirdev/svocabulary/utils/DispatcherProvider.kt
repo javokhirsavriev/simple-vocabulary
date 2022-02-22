@@ -8,10 +8,4 @@ import javax.inject.Singleton
 class DispatcherProvider @Inject constructor() {
 
     fun getIO() = Dispatchers.IO
-
-    fun getMain() = Dispatchers.Main
-
-    fun getUnconfined() = Dispatchers.Unconfined
-
-    fun getDefault() = Dispatchers.Default
 }
