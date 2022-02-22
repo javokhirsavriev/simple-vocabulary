@@ -30,10 +30,6 @@ class SettingsVM @Inject constructor(
         }
     }
 
-    fun importDatabaseFromCSVFile() {
-
-    }
-
     fun exportDatabaseToCSVFile(context: Context) {
         viewModelScope.launch {
             exportData.value = UIState.loading(true)

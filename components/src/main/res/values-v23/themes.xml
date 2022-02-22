@@ -11,9 +11,9 @@
         <item name="android:statusBarColor">@color/colorWhite</item>
         <item name="android:windowLightStatusBar">true</item>
 
-        <item name="android:windowBackground">@color/colorGray100</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
         <item name="android:windowDisablePreview">true</item>
-        <item name="android:autofilledHighlight" tools:targetApi="o">@color/colorTransparent</item>
+        <item name="android:autofilledHighlight" tools:targetApi="o">@android:color/transparent</item>
 
         <item name="alertDialogTheme">@style/DialogStyle</item>
         <item name="materialAlertDialogTheme">@style/DialogStyle</item>

@@ -14,9 +14,9 @@
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:windowLightStatusBar">true</item>
 
-        <item name="android:windowBackground">@color/colorGray100</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
         <item name="android:windowDisablePreview">true</item>
-        <item name="android:autofilledHighlight">@color/colorTransparent</item>
+        <item name="android:autofilledHighlight">@android:color/transparent</item>
 
         <item name="alertDialogTheme">@style/DialogStyle</item>
         <item name="materialAlertDialogTheme">@style/DialogStyle</item>

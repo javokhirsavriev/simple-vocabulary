@@ -29,7 +29,7 @@
     <style name="ImageButton">
         <item name="android:layout_width">?attr/actionBarSize</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="android:background">@color/colorTransparent</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:stateListAnimator">@animator/animation_selector</item>
         <item name="android:tint">@color/colorBlack</item>
     </style>
@@ -47,29 +47,10 @@
         <item name="pressedTranslationZ">@dimen/dp_3</item>
     </style>
 
-    <style name="NormalFabButton" parent="Widget.MaterialComponents.FloatingActionButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="fabSize">normal</item>
-        <item name="pressedTranslationZ">@dimen/dp_3</item>
-    </style>
-
     <style name="ThemeFabAppWhite">
         <item name="colorSecondary">@color/colorApp</item>
-        <item name="colorOnSecondary">@color/colorWhite</item>
+        <item name="colorOnSecondary">@color/colorButton</item>
         <item name="colorOnSurface">@color/colorApp</item>
-    </style>
-
-    <style name="ThemeFabGreenWhite">
-        <item name="colorSecondary">@color/colorGreen</item>
-        <item name="colorOnSecondary">@color/colorWhite</item>
-        <item name="colorOnSurface">@color/colorGreen</item>
-    </style>
-
-    <style name="ThemeFabRedWhite">
-        <item name="colorSecondary">@color/colorRed</item>
-        <item name="colorOnSecondary">@color/colorWhite</item>
-        <item name="colorOnSurface">@color/colorRed</item>
     </style>
 
 </resources>

@@ -2,14 +2,14 @@
 <resources>
     <color name="colorApp">#01579B</color>
     <color name="colorAppTransparent30">#4001579B</color>
-    <color name="colorBlack">#181818</color>
+    <color name="colorBlack">#FFFFFF</color>
     <color name="colorDarkBlack">#000000</color>
-    <color name="colorBackground">#F5F5F5</color>
-    <color name="colorGray200">#EEEEEE</color>
+    <color name="colorBackground">#111111</color>
+    <color name="colorGray200">#323232</color>
     <color name="colorGray400">#BDBDBD</color>
     <color name="colorGray500">#9E9E9E</color>
     <color name="colorGreen">#66BB6A</color>
     <color name="colorRed">#EF5350</color>
-    <color name="colorWhite">#FFFFFF</color>
-    <color name="colorButton">#FFFFFF</color>
+    <color name="colorWhite">#202020</color>
+    <color name="colorButton">#EEEEEE</color>
 </resources>

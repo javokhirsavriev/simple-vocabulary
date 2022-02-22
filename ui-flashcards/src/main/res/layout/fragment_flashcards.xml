@@ -28,33 +28,32 @@
                 android:id="@+id/textSideOne"
                 style="@style/Text16sp"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="@font/medium" />
+                android:fontFamily="@font/bold" />
 
             <TextView
                 android:id="@+id/textSideOneNumber"
                 style="@style/Text16sp"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="@font/medium"
+                android:fontFamily="@font/bold"
                 android:text="1" />
 
             <TextView
-                android:id="@+id/textSideDot"
                 style="@style/Text16sp"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="@font/medium"
+                android:fontFamily="@font/bold"
                 android:text="  •  " />
 
             <TextView
                 android:id="@+id/textSideTwo"
                 style="@style/Text16sp"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="@font/medium" />
+                android:fontFamily="@font/bold" />
 
             <TextView
                 android:id="@+id/textSideTwoNumber"
                 style="@style/Text16sp"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="@font/medium"
+                android:fontFamily="@font/bold"
                 android:text="2" />
         </LinearLayout>
 
@@ -114,14 +113,14 @@
 
             <TextView
                 style="@style/Text16sp"
-                android:fontFamily="@font/medium"
+                android:fontFamily="@font/bold"
                 android:text="@string/forgot" />
 
             <TextView
                 android:id="@+id/textForgotCount"
                 style="@style/Text16sp"
                 android:layout_marginStart="@dimen/dp_8"
-                android:fontFamily="@font/medium" />
+                android:fontFamily="@font/bold" />
         </LinearLayout>
     </LinearLayout>
 
@@ -149,14 +148,14 @@
 
             <TextView
                 style="@style/Text16sp"
-                android:fontFamily="@font/medium"
+                android:fontFamily="@font/bold"
                 android:text="@string/know_it" />
 
             <TextView
                 android:id="@+id/textRememberCount"
                 style="@style/Text16sp"
                 android:layout_marginStart="@dimen/dp_8"
-                android:fontFamily="@font/medium" />
+                android:fontFamily="@font/bold" />
         </LinearLayout>
     </LinearLayout>
 
