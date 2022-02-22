@@ -2,8 +2,10 @@ buildscript {
     apply from: "versions.gradle"
 
     dependencies {
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navVersion")
-        classpath("com.google.dagger:hilt-android-gradle-plugin:$hiltVersion")
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navVersion"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
+        classpath "com.google.gms:google-services:4.3.10"
+        classpath "com.google.firebase:firebase-crashlytics-gradle:2.8.1"
     }
 }
 
