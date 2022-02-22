@@ -3,6 +3,8 @@ plugins {
     id "org.jetbrains.kotlin.android"
     id "kotlin-kapt"
     id "dagger.hilt.android.plugin"
+    id "com.google.gms.google-services"
+    id "com.google.firebase.crashlytics"
 }
 
 apply from: "../configs.gradle"
@@ -32,6 +34,8 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
 
     /* Google libraries */
+    implementation "com.google.firebase:firebase-crashlytics-ktx:18.2.8"
+    implementation "com.google.firebase:firebase-analytics-ktx:20.1.0"
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
 
